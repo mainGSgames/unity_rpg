@@ -44,8 +44,25 @@ namespace Unity.BossRoom.CameraUtils
 
             if (m_OrbitalFollow != null)
             {
-                // set a lower angle to be closer to over-the-shoulder by default
-                m_OrbitalFollow.VerticalAxis.Value = 0.1f;
+                // Configure OrbitalFollow for classic third-person sphere orbit
+                m_OrbitalFollow.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.Sphere;
+                m_OrbitalFollow.Radius = 6.5f; // comfortable third-person distance
+
+                // Horizontal (yaw): wrap, no recentering
+                var h = m_OrbitalFollow.HorizontalAxis;
+                h.Wrap = true;
+                h.Recentering.Enabled = false;
+                h.Range = new Vector2(-180f, 180f);
+                m_OrbitalFollow.HorizontalAxis = h;
+
+                // Vertical (pitch): set a reasonable range and default value, no recentering
+                var v = m_OrbitalFollow.VerticalAxis;
+                v.Wrap = false;
+                v.Recentering.Enabled = false;
+                v.Range = new Vector2(-25f, 60f);
+                v.Value = 15f; // slight downward look by default
+                m_OrbitalFollow.VerticalAxis = v;
+
                 // slight shoulder offset
                 m_OrbitalFollow.TargetOffset = new Vector3(0.5f, 1.6f, 0f);
             }
@@ -63,12 +80,14 @@ namespace Unity.BossRoom.CameraUtils
 
             if (lookActive)
             {
-                // horizontal orbit
+                // horizontal orbit (yaw)
                 m_OrbitalFollow.HorizontalAxis.Value += delta.x * m_MouseXSensitivity;
-                // vertical tilt [0..1]
-                var v = m_OrbitalFollow.VerticalAxis.Value;
-                v -= delta.y * m_MouseYSensitivity * 0.01f; // scale down for finer tilt
-                m_OrbitalFollow.VerticalAxis.Value = Mathf.Clamp01(v);
+
+                // vertical tilt (pitch in degrees, clamped to axis range)
+                var pitch = m_OrbitalFollow.VerticalAxis.Value;
+                pitch -= delta.y * m_MouseYSensitivity; // mouse up -> look up
+                var r = m_OrbitalFollow.VerticalAxis.Range;
+                m_OrbitalFollow.VerticalAxis.Value = Mathf.Clamp(pitch, r.x, r.y);
             }
         }
     }
