@@ -15,7 +15,7 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character.AI
         private enum AIStateType
         {
             ATTACK,
-            //WANDER,
+            WANDER,
             IDLE,
         }
 
@@ -41,7 +41,7 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character.AI
             m_Logics = new Dictionary<AIStateType, AIState>
             {
                 [AIStateType.IDLE] = new IdleAIState(this),
-                //[ AIStateType.WANDER ] = new WanderAIState(this), // not written yet
+                [AIStateType.WANDER] = new WanderAIState(this),
                 [AIStateType.ATTACK] = new AttackAIState(this, m_ServerActionPlayer),
             };
             m_HatedEnemies = new List<ServerCharacter>();
