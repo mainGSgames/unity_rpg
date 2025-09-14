@@ -329,9 +329,6 @@ namespace Unity.BossRoom.Gameplay.UserInput
                                 NavMesh.AllAreas))
                         {
                             m_ServerCharacter.ServerSendCharacterInputRpc(hit.position);
-
-                            //Send our client only click request
-                            ClientMoveEvent?.Invoke(hit.position);
                         }
                     }
                 }
@@ -362,7 +359,6 @@ namespace Unity.BossRoom.Gameplay.UserInput
                         if (NavMesh.SamplePosition(desired, out var hit, k_MaxNavMeshDistance, NavMesh.AllAreas))
                         {
                             m_ServerCharacter.ServerSendCharacterInputRpc(hit.position);
-                            ClientMoveEvent?.Invoke(hit.position);
                         }
                     }
                 }
@@ -618,19 +614,19 @@ namespace Unity.BossRoom.Gameplay.UserInput
                 //IsPointerOverGameObject() is a simple way to determine if the mouse is over a UI element. If it is, we don't perform mouse input logic,
                 //to model the button "blocking" mouse clicks from falling through and interacting with the world.
 
-                if (m_Skill1Action.action.WasPressedThisFrame())
+                // Primary attack on Left Mouse
+                if (m_Skill1Action.action.WasPressedThisFrame() || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
                 {
                     RequestAction(CharacterClass.Skill1.ActionID, SkillTriggerStyle.MouseClick);
                 }
 
-                if (m_TargetAction.action.WasPressedThisFrame())
+                // Secondary attack on Right Mouse
+                if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame && actionState2 != null)
                 {
-                    RequestAction(GameDataSource.Instance.GeneralTargetActionPrototype.ActionID, SkillTriggerStyle.MouseClick);
+                    RequestAction(actionState2.actionID, SkillTriggerStyle.MouseClick);
                 }
-                else if (m_TargetAction.action.IsPressed())
-                {
-                    m_MoveRequest = true;
-                }
+
+                // Disable click-to-move/targeting via m_TargetAction to avoid conflicts with RMB attack
             }
 
             // Read keyboard WASD for continuous movement
