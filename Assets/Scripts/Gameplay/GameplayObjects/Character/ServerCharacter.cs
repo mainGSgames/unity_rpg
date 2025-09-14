@@ -228,6 +228,19 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
             PlayAction(ref data1);
         }
 
+        /// <summary>
+        /// Client->Server RPC that sets the desired facing direction for strafing/camera-driven facing.
+        /// </summary>
+        /// <param name="forward">World forward direction (y ignored)</param>
+        [Rpc(SendTo.Server)]
+        public void ServerSetFacingDirectionRpc(Vector3 forward)
+        {
+            if (!IsServer) return;
+            if (LifeState != LifeState.Alive) return;
+
+            m_Movement.SetDesiredFacing(forward);
+        }
+
         // UTILITY AND SPECIAL-PURPOSE RPCs
 
         /// <summary>

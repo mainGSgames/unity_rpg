@@ -1,0 +1,843 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Example of a complete Scriptable Renderer Feature in URP</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="../../">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../../../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../../../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/urp/renderer-features/create-custom-renderer-feature.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../../../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../../../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../../../StaticFilesManual/css/prism.css">
+<script src="../../../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../../../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../../../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../../../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="../../30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="../../index.html" class="selected">Manual</a></li>
+<li><a href="../../../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/renderer-features/create-custom-renderer-feature.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/renderer-features/create-custom-renderer-feature.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/renderer-features/create-custom-renderer-feature.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="../../render-pipelines.html">Render pipelines</a></li>
+<li><a href="../../universal-render-pipeline.html">Using the Universal Render Pipeline</a></li>
+<li><a href="../../urp/customizing-urp.html">Custom rendering and post-processing in URP</a></li>
+<li><a href="../../urp/inject-a-render-pass.html">Adding a Scriptable Render Pass to the frame rendering loop in URP</a></li>
+<li><a href="../../urp/renderer-features/scriptable-renderer-features/scriptable-renderer-features-landing.html">Injecting a render pass via a Scriptable Renderer Feature in URP</a></li>
+<li>Example of a complete Scriptable Renderer Feature in URP</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/renderer-features/scriptable-renderer-features/apply-scriptable-feature-to-specific-camera.html"></a></span><div class="tip">Apply a Scriptable Renderer Feature to a specific camera type in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/renderer-features/scriptable-renderer-features/scriptable-renderer-feature-reference.html"></a></span><div class="tip">Scriptable Renderer Feature API reference for URP</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Example of a complete Scriptable Renderer Feature in URP</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>This section describes how to create a complete <a href="./scriptable-renderer-features/intro-to-scriptable-renderer-features.html">Scriptable Renderer Feature</a> for a URP renderer.</p>
+
+<p>This walkthrough contains the following sections:</p>
+
+<ul>
+<li><a href="#example-implementation-overview">Overview of this example implementation</a></li>
+<li><a href="#example-scene">Create example Scene and GameObjects</a></li>
+<li>
+<a href="#scriptable-renderer-feature">Create a scriptable Renderer Feature and add it to the Universal Renderer</a>
+
+<ul>
+<li><a href="#add-renderer-feature-to-asset">Add the Renderer Feature to the Universal Renderer asset</a></li>
+</ul>
+</li>
+<li><a href="#scriptable-render-pass">Create the scriptable Render Pass</a></li>
+<li><a href="#implement-the-settings-for-the-custom-render-pass">Implement the settings for the custom render pass</a></li>
+<li><a href="#implement-the-render-passes">Implement the render passes</a></li>
+<li><a href="#enqueue-the-render-pass-in-the-custom-renderer-feature">Enqueue the render pass in the custom renderer feature</a></li>
+<li><a href="#volume-component">Implement the volume component</a></li>
+<li>
+<a href="#all-complete-code-for-the-scripts-in-this-example">All complete code for the scripts in this example</a>
+
+<ul>
+<li><a href="#code-renderer-feature">Custom renderer feature code</a></li>
+<li><a href="#code-render-pass">Custom render pass code</a></li>
+<li><a href="#code-volume-component">Volume Component code</a></li>
+</ul>
+</li>
+<li><a href="#example-shader">The custom shader for the blur effect</a></li>
+</ul>
+
+<h2>
+<a name="example-implementation-overview" aria-hidden="true"></a>Overview of this example implementation</h2>
+
+<p>The example workflow on this page implements a custom renderer feature that uses <a href="./intro-to-scriptable-render-passes.html">custom Render Passes</a> to add a blur effect to the <span class="tooltip"><strong>camera</strong><span class="tooltiptext">A component which creates an image of a particular viewpoint in your scene. The output is either drawn to the screen or captured as a texture. <a class="tooltipMoreInfoLink" href="../../CamerasOverview.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Camera">Glossary</a></span></span></span> output.</p>
+
+<p>The implementation consists of the following parts:</p>
+
+<ul>
+<li><p>A <code>ScriptableRendererFeature</code> instance that enqueues a <code>ScriptableRenderPass</code> instance every frame.</p></li>
+<li>
+<p>A <code>ScriptableRenderPass</code> instance that performs the following steps:</p>
+
+<ul>
+<li><p>Creates a temporary <span class="tooltip"><strong>render texture</strong><span class="tooltiptext">A special type of Texture that is created and updated at runtime. To use them, first create a new Render Texture and designate one of your Cameras to render into it. Then you can use the Render Texture in a Material just like a regular Texture. <a class="tooltipMoreInfoLink" href="../../class-RenderTexture.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#RenderTexture">Glossary</a></span></span></span> using the <code>RenderTextureDescriptor</code> API.</p></li>
+<li><p>Applies two passes of the <a href="#example-shader">custom shader</a> to the camera output using the <code>TextureHandle</code> and the <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.core@17.0/api/UnityEngine.Rendering.RenderGraphModule.Util.RenderGraphUtils.html#UnityEngine_Rendering_RenderGraphModule_Util_RenderGraphUtils_AddBlitPass_UnityEngine_Rendering_RenderGraphModule_RenderGraph_UnityEngine_Rendering_RenderGraphModule_Util_RenderGraphUtils_BlitMaterialParameters_System_String_">AddBlitPass</a> API.</p></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a name="example-scene" aria-hidden="true"></a>Create example Scene and GameObjects</h2>
+
+<p>To set your project up for this example workflow:</p>
+
+<ol>
+<li><p>Create a new <span class="tooltip"><strong>Scene</strong><span class="tooltiptext">A Scene contains the environments and menus of your game. Think of each unique Scene file as a unique level. In each Scene, you place your environments, obstacles, and decorations, essentially designing and building your game in pieces. <a class="tooltipMoreInfoLink" href="../../CreatingScenes.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Scene">Glossary</a></span></span></span>.</p></li>
+<li><p>Create two GameObjects: a Cube <span class="tooltip"><strong>GameObject</strong><span class="tooltiptext">The fundamental object in Unity scenes, which can represent characters, props, scenery, cameras, waypoints, and more. A GameObject’s functionality is defined by the Components attached to it. <a class="tooltipMoreInfoLink" href="../../class-GameObject.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#GameObject">Glossary</a></span></span></span> called <code>Cube</code>, and a Sphere GameObject called <code>Sphere</code>.</p></li>
+<li><p>Create two Materials with a shader that lets you specify the base color (for example, the <code>Universal Render Pipeline/Lit</code> shader). Call the Materials <code>Blue</code> and <code>Red</code>, and set the base colors of the Materials to blue and red respectively.</p></li>
+<li><p>Assign the <code>Red</code> Material to the cube and the <code>Blue</code> Material to the sphere.</p></li>
+<li><p>Position the camera so that it has the cube and the sphere in its view.</p></li>
+<li><p>In the URP Asset, set the property <strong>Quality</strong> &gt; <strong>Anti Aliasing (MSAA)</strong> to <strong>Disabled</strong>. The purpose of this step is to simplify the example implementation.</p></li>
+</ol>
+
+<p>The sample scene looks like the following image:</p>
+
+<figure>
+<img src="../../../uploads/urp/customizing-urp/custom-renderer-feature/sample-scene.png" alt="Sample scene">
+<figcaption>Sample scene</figcaption>
+</figure>
+
+<h2>
+<a name="scriptable-renderer-feature" aria-hidden="true"></a>Create a scriptable Renderer Feature and add it to the Universal Renderer</h2>
+
+<ol>
+<li><p>Create a new C# script and name it <code>BlurRendererFeature.cs</code>.</p></li>
+<li><p>In the script, remove the code that Unity inserted in the <code>BlurRendererFeature</code> class.</p></li>
+<li>
+<p>Add the following <code>using</code> directive:</p>
+
+<pre><code class="lang-cs">using UnityEngine.Rendering.Universal;
+</code></pre>
+</li>
+<li>
+<p>Create the <code>BlurRendererFeature</code> class that inherits from the <strong>ScriptableRendererFeature</strong> class.</p>
+
+<pre><code class="lang-cs">public class BlurRendererFeature : ScriptableRendererFeature    
+</code></pre>
+</li>
+<li>
+<p>In the <code>BlurRendererFeature</code> class, implement the following methods:</p>
+
+<ul>
+<li>
+<p>
+<code>Create</code>: Unity calls this method on the following events:</p>
+
+<ul>
+<li><p>When the Renderer Feature loads the first time.</p></li>
+<li><p>When you enable or disable the Renderer Feature.</p></li>
+<li><p>When you change a property in the <span class="tooltip"><strong>inspector</strong><span class="tooltiptext">A Unity window that displays information about the currently selected GameObject, asset or project settings, allowing you to inspect and edit the values. <a class="tooltipMoreInfoLink" href="../../UsingTheInspector.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Inspector">Glossary</a></span></span></span> of the Renderer Feature.</p></li>
+</ul>
+</li>
+<li><p>
+<code>AddRenderPasses</code>: Unity calls this method every frame, once for each camera. This method lets you inject <code>ScriptableRenderPass</code> instances into the scriptable Renderer.</p></li>
+</ul>
+</li>
+</ol>
+
+<p>Now you have the custom <code>BlurRendererFeature</code> Renderer Feature with its main methods.</p>
+
+<p>Here’s the complete code for this step:</p>
+
+<pre><code class="lang-cs">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
+public class BlurRendererFeature : ScriptableRendererFeature
+{
+    public override void Create()
+    {
+
+    }
+
+    public override void AddRenderPasses(ScriptableRenderer renderer,
+        ref RenderingData renderingData)
+    {
+
+    }
+}
+</code></pre>
+
+<h3>
+<a name="add-renderer-feature-to-asset" aria-hidden="true"></a>Add the Renderer Feature to the Universal Renderer asset</h3>
+
+<p>Add the Renderer Feature you created to the Universal Renderer asset. For information on how to do this, refer to the page <a href="../urp-renderer-feature.html">How to add a Renderer Feature to a Renderer</a>.</p>
+
+<h2>
+<a name="scriptable-render-pass" aria-hidden="true"></a>Create the scriptable Render Pass</h2>
+
+<p>This section demonstrates how to create a scriptable Render Pass and enqueue its instance into the scriptable Renderer.</p>
+
+<ol>
+<li><p>Create a new C# script and name it <code>BlurRenderPass.cs</code>.</p></li>
+<li>
+<p>In the script, remove the code that Unity inserted in the <code>BlurRenderPass</code> class. Add the following <code>using</code> directive:</p>
+
+<pre><code class="lang-cs">using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+using UnityEngine.Rendering.Universal;
+</code></pre>
+</li>
+<li>
+<p>Create the <code>BlurRenderPass</code> class that inherits from the <strong>ScriptableRenderPass</strong> class.</p>
+
+<pre><code class="lang-cs">public class BlurRenderPass : ScriptableRenderPass
+</code></pre>
+</li>
+<li>
+<p>Add the <code>RecordRenderGraph</code> method to the class. This method adds and configures render passes in the render graph. This process includes declaring render pass inputs and outputs, but doesn’t include adding commands to command buffers. Unity calls this method every frame, once for each camera.</p>
+
+<pre><code class="lang-cs">public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
+{ }
+</code></pre>
+</li>
+</ol>
+
+<p>Here’s the complete code for the <code>BlurRenderPass.cs</code> file from this section:</p>
+
+<pre><code class="lang-cs">using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+using UnityEngine.Rendering.Universal;
+
+public class BlurRenderPass : ScriptableRenderPass
+{
+    public override void RecordRenderGraph(RenderGraph renderGraph,
+    ContextContainer frameData)
+    {
+        
+    }
+}
+</code></pre>
+
+<p><a name="implement-the-settings-for-the-custom-render-pass" aria-hidden="true"></a></p>
+
+<h2>Implement the settings for the custom render pass</h2>
+
+<p>This section demonstrates how to implement the settings for the custom blur render pass.</p>
+
+<ol>
+<li>
+<p>The Renderer Feature in this example uses the <span class="tooltip"><a href="#example-shader">shader</a><span class="tooltiptext">A program that runs on the GPU. <a class="tooltipMoreInfoLink" href="../../Shaders.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Shader">Glossary</a></span></span></span> that performs the blur horizontally in one pass, and vertically in another pass. To let users control the blur value for each pass, add the following <code>BlurSettings</code> class to the <code>BlurRendererFeature.cs</code> script.</p>
+
+<pre><code class="lang-cs">[Serializable]
+public class BlurSettings
+{
+    [Range(0,0.4f)] public float horizontalBlur;
+    [Range(0,0.4f)] public float verticalBlur;
+}
+</code></pre>
+</li>
+<li>
+<p>In the <code>BlurRendererFeature</code> class, declare the following fields:</p>
+
+<pre><code class="lang-cs">[SerializeField] private BlurSettings settings;
+[SerializeField] private Shader shader;
+private Material material;
+private BlurRenderPass blurRenderPass;
+</code></pre>
+</li>
+<li>
+<p>In the <code>BlurRenderPass</code> class, add the fields for the settings, the Material, and the constructor that uses those fields. Add the <code>TextureDesc</code> field as well. The <code>TextureDesc</code> class lets you specify the properties of a render texture, such as the width, height, and format.</p>
+
+<pre><code class="lang-cs">private BlurSettings defaultSettings;
+private Material material;
+
+private RenderTextureDescriptor blurTextureDescriptor;
+
+public BlurRenderPass(Material material, BlurSettings defaultSettings)
+{
+    this.material = material;
+    this.defaultSettings = defaultSettings;
+}
+</code></pre>
+</li>
+<li>
+<p>In the <code>RecordRenderGraph</code> method, create the variable for storing the <code>UniversalResourceData</code> instance from the <code>frameData</code> parameter. <code>UniversalResourceData</code> contains all the texture references used by URP, including the active color and depth textures of the camera.</p>
+
+<pre><code class="lang-cs">UniversalResourceData resourceData = frameData.Get&lt;UniversalResourceData&gt;();
+</code></pre>
+</li>
+<li>
+<p>Declare the variables for interacting with the shader properties.</p>
+
+<pre><code class="lang-cs">private static readonly int horizontalBlurId = Shader.PropertyToID(&quot;_HorizontalBlur&quot;);
+private static readonly int verticalBlurId = Shader.PropertyToID(&quot;_VerticalBlur&quot;);
+private const string k_BlurTextureName = &quot;_BlurTexture&quot;;
+private const string k_VerticalPassName = &quot;VerticalBlurRenderPass&quot;;
+private const string k_HorizontalPassName = &quot;HorizontalBlurRenderPass&quot;;
+</code></pre>
+</li>
+<li>
+<p>In the <code>RecordRenderGraph</code> method, declare the <code>TextureHandle</code> fields to store the references to the input and the output textures. Initialize the <code>TextureDesc</code> of the destination texture.</p>
+
+<p>The destination texture is based on the camera color texture, so you can use the descriptor of the camera color texture as a starting point to define the destination texture. Using the same descriptor as the camera color texture ensures the source and destination textures will have the same size and color format (unless you choose to change the descriptor).</p>
+
+<pre><code class="lang-cs">TextureHandle srcCamColor = resourceData.activeColorTexture;
+blurTextureDescriptor = srcCamColor.GetDescriptor(renderGraph);
+blurTextureDescriptor.name = k_BlurTextureName;
+blurTextureDescriptor.depthBufferBits = 0;
+var dst = renderGraph.CreateTexture(blurTextureDescriptor);
+</code></pre>
+</li>
+<li>
+<p>In the <code>BlurRenderPass</code> class, implement the <code>UpdateBlurSettings</code> method that updates the shader values.</p>
+
+<pre><code class="lang-cs">private void UpdateBlurSettings()
+{
+    if (material == null) return;
+
+    material.SetFloat(horizontalBlurId, defaultSettings.horizontalBlur);
+    material.SetFloat(verticalBlurId, defaultSettings.verticalBlur);
+}
+</code></pre>
+</li>
+<li>
+<p>In the <code>RecordRenderGraph</code> method, add the variable for storing the <code>UniversalCameraData</code> data, and make sure the pass doesn’t <span class="tooltip"><strong>blit</strong><span class="tooltiptext">A shorthand term for “bit block transfer”. A blit operation is the process of transferring blocks of data from one place in memory to another.<br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#blit">Glossary</a></span></span></span> from the back buffer.</p>
+
+<pre><code class="lang-cs">UniversalCameraData cameraData = frameData.Get&lt;UniversalCameraData&gt;();
+
+// The following line ensures that the render pass doesn't blit
+// from the back buffer.
+if (resourceData.isActiveTargetBackBuffer)
+    return;
+</code></pre>
+</li>
+<li>
+<p>In the <code>RecordRenderGraph</code> method, add the function to continuously update the blur settings in the material.</p>
+
+<pre><code class="lang-cs">// Update the blur settings in the material
+UpdateBlurSettings();
+
+// This check is to avoid an error from the material preview in the scene
+if (!srcCamColor.IsValid() || !dst.IsValid())
+    return;
+</code></pre>
+</li>
+</ol>
+
+<p><a name="implement-the-render-passes" aria-hidden="true"></a></p>
+
+<h2>Implement the render passes</h2>
+
+<p>In the <code>RecordRenderGraph</code> method, using the <code>AddBlitPass</code> method, add the vertical and the horizontal blur render passes.</p>
+
+<pre><code class="lang-cs">// The AddBlitPass method adds a vertical blur render graph pass that blits from the source texture (camera color in this case) to the destination texture using the first shader pass (the shader pass is defined in the last parameter).
+RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 0);
+renderGraph.AddBlitPass(paraVertical, k_VerticalPassName);
+
+// The AddBlitPass method adds a horizontal blur render graph pass that blits from the texture written by the vertical blur pass to the camera color texture. The method uses the second shader pass.
+RenderGraphUtils.BlitMaterialParameters paraHorizontal = new(dst, srcCamColor, material, 1);
+renderGraph.AddBlitPass(paraHorizontal, k_HorizontalPassName);
+</code></pre>
+
+<p>The complete code for this part is in <a href="#code-render-pass">Custom render pass code</a>.</p>
+
+<p><a name="enqueue-the-render-pass-in-the-custom-renderer-feature" aria-hidden="true"></a></p>
+
+<h2>Enqueue the render pass in the custom renderer feature</h2>
+
+<p>In this section, you instantiate the render pass in the <code>Create</code> method of the <code>BlurRendererFeature</code> class, and enqueue it in the <code>AddRenderPasses</code> method.</p>
+
+<ol>
+<li>
+<p>In the <code>Create</code> method of the <code>BlurRendererFeature</code> class, instantiate the <code>BlurRenderPass</code> class.</p>
+
+<p>In the method, use the <code>renderPassEvent</code> field to specify when to execute the render pass.</p>
+
+<pre><code class="lang-cs">public override void Create()
+{
+    if (shader == null)
+    {
+        return;
+    }
+    material = new Material(shader);
+    blurRenderPass = new BlurRenderPass(material, settings);
+
+    blurRenderPass.renderPassEvent = RenderPassEvent.AfterRenderingSkybox;
+}
+</code></pre>
+</li>
+<li>
+<p>In the <code>AddRenderPasses</code> method of the <code>BlurRendererFeature</code> class, enqueue the render pass with the <code>EnqueuePass</code> method.</p>
+
+<pre><code class="lang-cs">public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+{
+    if (blurRenderPass == null)
+    { 
+        return;
+    }                
+    if (renderingData.cameraData.cameraType == CameraType.Game)
+    {
+        renderer.EnqueuePass(blurRenderPass);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the <code>Dispose</code> method that destroys the material instance that the Renderer Feature creates.</p>
+
+<pre><code class="lang-cs">protected override void Dispose(bool disposing)
+{
+    if (Application.isPlaying)
+    {
+        Destroy(material);
+    }
+    else
+    {
+        DestroyImmediate(material);
+    }
+}
+</code></pre>
+</li>
+</ol>
+
+<p>For the complete Renderer Feature code, refer to <a href="#code-renderer-feature">Custom renderer feature code</a>.</p>
+
+<p>The Scriptable Renderer Feature is now complete. The following image shows the effect of the feature in the Game view and the example settings.</p>
+
+<p>
+<img src="../../../uploads/urp/customizing-urp/custom-renderer-feature/final-effect.png" alt="The effect of the Scriptable Renderer Feature in the Game view"><br><em>The effect of the Scriptable Renderer Feature in the Game view.</em>
+</p>
+
+<h2>
+<a name="volume-component" aria-hidden="true"></a>Implement the volume component</h2>
+
+<p>This section shows how to implement a volume component that lets you control the input values for the custom renderer feature.</p>
+
+<ol>
+<li><p>Create a new C# script and name it <code>CustomVolumeComponent.cs</code>.</p></li>
+<li>
+<p>Inherit the <code>CustomVolumeComponent</code> class from the <code>VolumeComponent</code> class, add the <code>[Serializable]</code> attribute to the class.</p>
+
+<p>Add the <code>using UnityEngine.Rendering;</code> directive.</p>
+
+<pre><code class="lang-cs">using System;
+using UnityEngine.Rendering;
+
+[Serializable]
+public class CustomVolumeComponent : VolumeComponent
+{
+
+}
+</code></pre>
+</li>
+<li>
+<p>Add the fields to control the blur settings defined in the custom renderer feature.</p>
+
+<pre><code class="lang-cs">[Serializable]
+public class CustomVolumeComponent : VolumeComponent
+{
+    public ClampedFloatParameter horizontalBlur =
+        new ClampedFloatParameter(0.05f, 0, 0.5f);
+    public ClampedFloatParameter verticalBlur =
+        new ClampedFloatParameter(0.05f, 0, 0.5f);
+}
+</code></pre>
+</li>
+<li>
+<p>In the <code>BlurRenderPass</code> script, change the <code>UpdateBlurSettings</code> method so that it uses the settings defined in a Volume or the default settings if no Volume is set.</p>
+
+<pre><code class="lang-cs">private void UpdateBlurSettings()
+{
+    if (material == null) return;
+
+    // Use the Volume settings or the default settings if no Volume is set.
+    var volumeComponent =
+        VolumeManager.instance.stack.GetComponent&lt;CustomVolumeComponent&gt;();
+    float horizontalBlur = volumeComponent.horizontalBlur.overrideState ?
+        volumeComponent.horizontalBlur.value : defaultSettings.horizontalBlur;
+    float verticalBlur = volumeComponent.verticalBlur.overrideState ?
+        volumeComponent.verticalBlur.value : defaultSettings.verticalBlur;
+    material.SetFloat(horizontalBlurId, horizontalBlur);
+    material.SetFloat(verticalBlurId, verticalBlur);
+}
+</code></pre>
+</li>
+<li><p>In the Unity scene, create a <a href="../Volumes.html">local Box Volume</a>. If a <a href="../Volume-Profile.html">Volume Profile</a> is missing, create a new one by clicking <strong>New</strong> next to the <strong>Profile</strong> property. Add the <code>Custom Volume Component</code> <a href="../VolumeOverrides.html">override</a> to the Volume.</p></li>
+<li><p>Enable the settings in the <code>Custom Volume Component</code> override and set the values for this Volume. Move the Volume so that the camera is inside it. The settings from the Volume override the default settings from the custom renderer feature.</p></li>
+</ol>
+
+<p><a name="all-complete-code-for-the-scripts-in-this-example" aria-hidden="true"></a></p>
+
+<h2>All complete code for the scripts in this example</h2>
+
+<p>This section contains the complete code for all the <span class="tooltip"><strong>scripts</strong><span class="tooltiptext">A piece of code that allows you to create your own Components, trigger game events, modify Component properties over time and respond to user input in any way you like. <a class="tooltipMoreInfoLink" href="../../creating-scripts.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Scripts">Glossary</a></span></span></span> in this example.</p>
+
+<h3>
+<a name="code-renderer-feature" aria-hidden="true"></a>Custom renderer feature code</h3>
+
+<p>Here’s the complete code for the custom renderer feature script:</p>
+
+<pre><code class="lang-cs">using System;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
+public class BlurRendererFeature : ScriptableRendererFeature
+{
+    [SerializeField] private BlurSettings settings;
+    [SerializeField] private Shader shader;
+    private Material material;
+    private BlurRenderPass blurRenderPass;
+
+    public override void Create()
+    {
+        if (shader == null)
+        {
+            return;
+        }
+        material = new Material(shader);
+        blurRenderPass = new BlurRenderPass(material, settings);
+        
+        blurRenderPass.renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+    }
+
+    public override void AddRenderPasses(ScriptableRenderer renderer,
+        ref RenderingData renderingData)
+    {
+        if (blurRenderPass == null)
+        { 
+            return;
+        }    
+        if (renderingData.cameraData.cameraType == CameraType.Game)
+        {
+            renderer.EnqueuePass(blurRenderPass);
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (Application.isPlaying)
+        {
+            Destroy(material);
+        }
+        else
+        {
+            DestroyImmediate(material);
+        }
+    }
+}
+
+[Serializable]
+public class BlurSettings
+{
+    [Range(0, 0.4f)] public float horizontalBlur;
+    [Range(0, 0.4f)] public float verticalBlur;
+}
+</code></pre>
+
+<h3>
+<a name="code-render-pass" aria-hidden="true"></a>Custom render pass code</h3>
+
+<p>Here’s the complete code for the custom Render Pass script:</p>
+
+<pre><code class="lang-cs">using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+using UnityEngine.Rendering.Universal;
+
+public class BlurRenderPass : ScriptableRenderPass
+{
+    private static readonly int horizontalBlurId = Shader.PropertyToID(&quot;_HorizontalBlur&quot;);
+    private static readonly int verticalBlurId = Shader.PropertyToID(&quot;_VerticalBlur&quot;);
+    private const string k_BlurTextureName = &quot;_BlurTexture&quot;;
+    private const string k_VerticalPassName = &quot;VerticalBlurRenderPass&quot;;
+    private const string k_HorizontalPassName = &quot;HorizontalBlurRenderPass&quot;;
+
+    private BlurSettings defaultSettings;
+    private Material material;
+
+    private RenderTextureDescriptor blurTextureDescriptor;
+
+    public BlurRenderPass(Material material, BlurSettings defaultSettings)
+    {
+        this.material = material;
+        this.defaultSettings = defaultSettings;
+    }
+
+    private void UpdateBlurSettings()
+    {
+        if (material == null) return;
+
+        // Use the Volume settings or the default settings if no Volume is set.
+        var volumeComponent =
+            VolumeManager.instance.stack.GetComponent&lt;CustomVolumeComponent&gt;();
+        float horizontalBlur = volumeComponent.horizontalBlur.overrideState ?
+            volumeComponent.horizontalBlur.value : defaultSettings.horizontalBlur;
+        float verticalBlur = volumeComponent.verticalBlur.overrideState ?
+            volumeComponent.verticalBlur.value : defaultSettings.verticalBlur;
+        material.SetFloat(horizontalBlurId, horizontalBlur);
+        material.SetFloat(verticalBlurId, verticalBlur);
+    }
+
+    public override void RecordRenderGraph(RenderGraph renderGraph,
+    ContextContainer frameData)
+    {
+        UniversalResourceData resourceData = frameData.Get&lt;UniversalResourceData&gt;();
+
+        UniversalCameraData cameraData = frameData.Get&lt;UniversalCameraData&gt;();
+
+        // The following line ensures that the render pass doesn't blit
+        // from the back buffer.
+        if (resourceData.isActiveTargetBackBuffer)
+            return;
+
+        TextureHandle srcCamColor = resourceData.activeColorTexture;
+        blurTextureDescriptor = resourceData.activeColorTexture.GetDescriptor(renderGraph);
+        blurTextureDescriptor.name = k_BlurTextureName;
+        blurTextureDescriptor.depthBufferBits = 0;
+        var dst = renderGraph.CreateTexture(blurTextureDescriptor);
+
+        // Update the blur settings in the material
+        UpdateBlurSettings();
+
+        // This check is to avoid an error from the material preview in the scene
+        if (!srcCamColor.IsValid() || !dst.IsValid())
+            return;
+        
+        // The AddBlitPass method adds a vertical blur render graph pass that blits from the source texture (camera color in this case) to the destination texture using the first shader pass (the shader pass is defined in the last parameter).
+        RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 0);
+        renderGraph.AddBlitPass(paraVertical, k_VerticalPassName);
+        
+        // The AddBlitPass method adds a horizontal blur render graph pass that blits from the texture written by the vertical blur pass to the camera color texture. The method uses the second shader pass.
+        RenderGraphUtils.BlitMaterialParameters paraHorizontal = new(dst, srcCamColor, material, 1);
+        renderGraph.AddBlitPass(paraHorizontal, k_HorizontalPassName);
+    }
+}
+</code></pre>
+
+<h3>
+<a name="code-volume-component" aria-hidden="true"></a>Volume Component code</h3>
+
+<p>Here’s the complete code for the Volume Component script:</p>
+
+<pre><code class="lang-cs">using System;
+using UnityEngine.Rendering;
+
+[Serializable]
+public class CustomVolumeComponent : VolumeComponent
+{
+    public ClampedFloatParameter horizontalBlur =
+        new ClampedFloatParameter(0.05f, 0, 0.5f);
+    public ClampedFloatParameter verticalBlur =
+        new ClampedFloatParameter(0.05f, 0, 0.5f);
+}
+</code></pre>
+
+<h2>
+<a name="example-shader" aria-hidden="true"></a>The custom shader for the blur effect</h2>
+
+<p>This section contains the code for the custom shader that implements the blur effect.</p>
+
+<pre><code class="lang-cpp">Shader &quot;CustomEffects/Blur&quot;
+{
+    HLSLINCLUDE
+    
+        #include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;
+        // The Blit.hlsl file provides the vertex shader (Vert),
+        // the input structure (Attributes), and the output structure (Varyings)
+        #include &quot;Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl&quot;
+
+        float _VerticalBlur;
+        float _HorizontalBlur;
+    
+        float4 BlurVertical (Varyings input) : SV_Target
+        {
+            const float BLUR_SAMPLES = 64;
+            const float BLUR_SAMPLES_RANGE = BLUR_SAMPLES / 2;
+            
+            float3 color = 0;
+            float blurPixels = _VerticalBlur * _ScreenParams.y;
+            
+            for(float i = -BLUR_SAMPLES_RANGE; i &lt;= BLUR_SAMPLES_RANGE; i++)
+            {
+                float2 sampleOffset = float2 (0, (blurPixels / _BlitTexture_TexelSize.w) * (i / BLUR_SAMPLES_RANGE));
+                color += SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord + sampleOffset).rgb;
+            }
+            
+            return float4(color.rgb / (BLUR_SAMPLES + 1), 1);
+        }
+
+        float4 BlurHorizontal (Varyings input) : SV_Target
+        {
+            const float BLUR_SAMPLES = 64;
+            const float BLUR_SAMPLES_RANGE = BLUR_SAMPLES / 2;
+            
+            UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+            float3 color = 0;
+            float blurPixels = _HorizontalBlur * _ScreenParams.x;
+            for(float i = -BLUR_SAMPLES_RANGE; i &lt;= BLUR_SAMPLES_RANGE; i++)
+            {
+                float2 sampleOffset =
+                    float2 ((blurPixels / _BlitTexture_TexelSize.z) * (i / BLUR_SAMPLES_RANGE), 0);
+                color += SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord + sampleOffset).rgb;
+            }
+            return float4(color / (BLUR_SAMPLES + 1), 1);
+        }
+    
+    ENDHLSL
+    
+    SubShader
+    {
+        Tags { &quot;RenderType&quot;=&quot;Opaque&quot; &quot;RenderPipeline&quot; = &quot;UniversalPipeline&quot;}
+        LOD 100
+        ZWrite Off Cull Off
+        Pass
+        {
+            Name &quot;BlurPassVertical&quot;
+
+            HLSLPROGRAM
+            
+            #pragma vertex Vert
+            #pragma fragment BlurVertical
+            
+            ENDHLSL
+        }
+        
+        Pass
+        {
+            Name &quot;BlurPassHorizontal&quot;
+
+            HLSLPROGRAM
+            
+            #pragma vertex Vert
+            #pragma fragment BlurHorizontal
+            
+            ENDHLSL
+        }
+    }
+}
+</code></pre>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li>The blit examples in the <a href="../package-sample-urp-package-samples.html">URP RenderGraph Samples</a>
+</li>
+<li><a href="custom-rendering-pass-workflow-in-urp.html">Custom render pass workflow in URP</a></li>
+<li><a href="../working-with-textures.html">Textures in the Render Graph system in URP</a></li>
+</ul>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/renderer-features/scriptable-renderer-features/apply-scriptable-feature-to-specific-camera.html"></a></span><div class="tip">Apply a Scriptable Renderer Feature to a specific camera type in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/renderer-features/scriptable-renderer-features/scriptable-renderer-feature-reference.html"></a></span><div class="tip">Scriptable Renderer Feature API reference for URP</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

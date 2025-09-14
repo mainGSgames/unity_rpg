@@ -2,6 +2,9 @@
 
 This document maps the core systems, flows, and extension points of this Unity RPG project (based on the Boss Room sample). Use it as a practical guide when adding features, debugging, or onboarding a new engineer.
 
+This game is build in Unity 6.2
+
+
 ## Architecture Overview
 
 - Netcode: Server-authoritative using Netcode for GameObjects (NGO). Most simulation runs on server; clients send input RPCs and render state via NetworkVariables and client RPCs.

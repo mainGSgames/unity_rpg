@@ -122,6 +122,14 @@ namespace Unity.BossRoom.Gameplay.UserInput
 
         public event Action<Vector3> ClientMoveEvent;
 
+        // WASD movement additions
+        Vector2 m_KeyboardMove;
+        bool m_WasdMoveRequest;
+        const float k_WasdAheadDistance = 3.0f; // how far ahead to set the target each tick
+        const float k_WasdDeadzone = 0.1f; // minimal input magnitude to consider
+        float m_LastFacingSend;
+        const float k_FacingSendRateSeconds = 0.04f;
+
         /// <summary>
         /// Convenience getter that returns our CharacterData
         /// </summary>
@@ -323,6 +331,37 @@ namespace Unity.BossRoom.Gameplay.UserInput
                             m_ServerCharacter.ServerSendCharacterInputRpc(hit.position);
 
                             //Send our client only click request
+                            ClientMoveEvent?.Invoke(hit.position);
+                        }
+                    }
+                }
+            }
+
+            // WASD continuous movement handling (camera-relative)
+            if (m_WasdMoveRequest)
+            {
+                if ((Time.time - m_LastSentMove) > k_MoveSendRateSeconds)
+                {
+                    m_LastSentMove = Time.time;
+
+                    // compute camera-relative world direction
+                    var camFwd = m_MainCamera ? m_MainCamera.transform.forward : Vector3.forward;
+                    camFwd.y = 0f;
+                    camFwd.Normalize();
+                    var camRight = m_MainCamera ? m_MainCamera.transform.right : Vector3.right;
+                    camRight.y = 0f;
+                    camRight.Normalize();
+
+                    var worldDir = (camFwd * m_KeyboardMove.y + camRight * m_KeyboardMove.x);
+                    if (worldDir.sqrMagnitude > 0.0001f)
+                    {
+                        worldDir.Normalize();
+                        var desired = m_PhysicsWrapper.Transform.position + worldDir * k_WasdAheadDistance;
+
+                        // verify point is on/near navmesh
+                        if (NavMesh.SamplePosition(desired, out var hit, k_MaxNavMeshDistance, NavMesh.AllAreas))
+                        {
+                            m_ServerCharacter.ServerSendCharacterInputRpc(hit.position);
                             ClientMoveEvent?.Invoke(hit.position);
                         }
                     }
@@ -591,6 +630,62 @@ namespace Unity.BossRoom.Gameplay.UserInput
                 else if (m_TargetAction.action.IsPressed())
                 {
                     m_MoveRequest = true;
+                }
+            }
+
+            // Read keyboard WASD for continuous movement
+            var move = Vector2.zero;
+            if (Keyboard.current != null)
+            {
+                if (Keyboard.current.wKey.isPressed) move.y += 1f;
+                if (Keyboard.current.sKey.isPressed) move.y -= 1f;
+                if (Keyboard.current.aKey.isPressed) move.x -= 1f;
+                if (Keyboard.current.dKey.isPressed) move.x += 1f;
+            }
+            if (move.sqrMagnitude > 1f) move.Normalize();
+
+            if (move.magnitude > k_WasdDeadzone)
+            {
+                m_KeyboardMove = move;
+                m_WasdMoveRequest = true;
+
+                // keep server-facing aligned to camera for strafing
+                if ((Time.time - m_LastFacingSend) > k_FacingSendRateSeconds && m_MainCamera)
+                {
+                    m_LastFacingSend = Time.time;
+                    var camFwd = m_MainCamera.transform.forward;
+                    camFwd.y = 0f;
+                    if (camFwd.sqrMagnitude > 0.0001f)
+                    {
+                        camFwd.Normalize();
+                        m_ServerCharacter.ServerSetFacingDirectionRpc(camFwd);
+                    }
+                }
+            }
+            else
+            {
+                // if we were moving last frame but not anymore, quickly send a stop at our current position
+                if (m_WasdMoveRequest)
+                {
+                    m_WasdMoveRequest = false;
+                    m_ServerCharacter.ServerSendCharacterInputRpc(m_PhysicsWrapper.Transform.position);
+                }
+            }
+
+            // Even when not moving with WASD, align facing to camera when the player moves the mouse sideways
+            if ((Time.time - m_LastFacingSend) > k_FacingSendRateSeconds && m_MainCamera && Mouse.current != null)
+            {
+                var mouseDelta = Mouse.current.delta.ReadValue();
+                if (Mathf.Abs(mouseDelta.x) > 0.01f)
+                {
+                    m_LastFacingSend = Time.time;
+                    var camFwd = m_MainCamera.transform.forward;
+                    camFwd.y = 0f;
+                    if (camFwd.sqrMagnitude > 0.0001f)
+                    {
+                        camFwd.Normalize();
+                        m_ServerCharacter.ServerSetFacingDirectionRpc(camFwd);
+                    }
                 }
             }
         }

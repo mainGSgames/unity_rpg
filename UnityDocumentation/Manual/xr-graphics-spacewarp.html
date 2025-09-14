@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: URP Application Spacewarp </title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/xr-graphics-spacewarp.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../StaticFilesManual/css/prism.css">
+<script src="../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="index.html" class="selected">Manual</a></li>
+<li><a href="../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/xr-graphics-spacewarp.html">English</a></li>
+<li><a href="/cn/current/Manual/xr-graphics-spacewarp.html">中文</a></li>
+<li><a href="/ja/current/Manual/xr-graphics-spacewarp.html">日本語</a></li>
+<li><a href="/kr/current/Manual/xr-graphics-spacewarp.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/xr-graphics-spacewarp.html">English</a></li>
+<li><a href="/cn/current/Manual/xr-graphics-spacewarp.html">中文</a></li>
+<li><a href="/ja/current/Manual/xr-graphics-spacewarp.html">日本語</a></li>
+<li><a href="/kr/current/Manual/xr-graphics-spacewarp.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="XR.html">XR</a></li>
+<li><a href="xr-graphics.html">XR graphics</a></li>
+<li>URP Application Spacewarp </li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="VRFrameTiming.html"></a></span><div class="tip">VR frame timing </div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="xr-untethered-device-optimization.html"></a></span><div class="tip">Optimize for untethered XR devices in URP</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>URP Application Spacewarp</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>URP Application Spacewarp is an optimization for OpenXR that helps applications maintain a high frame rate. Spacewarp synthesizes every other frame, which can reduce computational power and energy use considerably. The technique uses reprojection when synthesizing frames to reduce latency between the user’s movements and display updates.</p>
+
+<p>Spacewarp can cause display artifacts and might require changes to your application for acceptable results. </p>
+
+<p>Refer to the following topics for information about how to use spacewarp in your Unity project:</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Topics</th>
+	<th style="text-align:left;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><a href="#prerequisites">Prerequisites</a></td>
+	<td style="text-align:left;">Lists the technical requirements needed to utilize spacewarp in Unity projects, including specific versions of Unity, OpenXR, URP, and other necessary components.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#understand-spacewarp">Understand URP Application Spacewarp</a></td>
+	<td style="text-align:left;">Explains how spacewarp works by interpolating frames and describes associated buffers, limitations, and potential visual artifacts you might encounter.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#workflow">Application spacewarp workflow</a></td>
+	<td style="text-align:left;">Provides an overview of how to enable and configure spacewarp in Unity projects.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#enable-spacewarp">Enable the OpenXR spacewarp feature in the Editor</a></td>
+	<td style="text-align:left;">Describes methods to enable spacewarp in Unity, either using the Meta SDK for Meta devices or a manual OpenXR feature configuration.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#control-spacewarp">Control spacewarp at runtime</a></td>
+	<td style="text-align:left;">Details how to control and manage the spacewarp feature at runtime.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#choose-shaders">Choose shaders compatible with spacewarp</a></td>
+	<td style="text-align:left;">Lists the types of <span class="tooltip"><strong>shaders</strong><span class="tooltiptext">A program that runs on the GPU. <a class="tooltipMoreInfoLink" href="Shaders.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Shader">Glossary</a></span></span></span> that are compatible with spacewarp.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#modify-custom-shaders">Modify custom shaders to support spacewarp</a></td>
+	<td style="text-align:left;">How to modify custom shaders to support spacewarp.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><a href="#materials">Configure Materials for spacewarp</a></td>
+	<td style="text-align:left;">How to apply the spacewarp feature to specific Materials by toggling the <strong><span class="tooltip"><strong>XR</strong><span class="tooltiptext">An umbrella term encompassing Virtual Reality (VR), Augmented Reality (AR) and Mixed Reality (MR) applications. Devices supporting these forms of interactive applications can be referred to as XR devices. <a class="tooltipMoreInfoLink" href="XR.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#XR">Glossary</a></span></span></span> Motion Vectors Pass (Space Warp)</strong> property.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li><a href="urp/render-graph.html">Rendergraph</a></li>
+<li><a href="urp/compatibility-mode.html">URP compatibility mode</a></li>
+<li><a href="universal-render-pipeline.html">Using the Universal Render Pipeline</a></li>
+<li><a href="shader-graph.html">Shader Graph</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.xr.openxr@latest">OpenXR</a></li>
+<li><a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_space_warp">OpenXR XR_FB_space_warp extension</a></li>
+<li><a href="https://developers.meta.com/horizon/documentation/unity/unity-asw/">Application Spacewarp Developer Guide (Meta)</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>To use URP Application Spacewarp, your project must meet the following prerequisites:</p>
+
+<ul>
+<li>Unity 6.1+</li>
+<li>OpenXR 1.11.0+</li>
+<li>Universal <span class="tooltip"><strong>Render Pipeline</strong><span class="tooltiptext">A series of operations that take the contents of a Scene, and displays them on a screen. Unity lets you choose from pre-built render pipelines, or write your own. <a class="tooltipMoreInfoLink" href="render-pipelines.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Renderpipeline">Glossary</a></span></span></span> (URP) 17.0.3+</li>
+<li>Rendergraph (Spacewarp is not supported in <a href="urp/compatibility-mode.html">URP compatibility mode</a>)</li>
+<li>Vulkan graphics API</li>
+<li>Android build target</li>
+<li>XR Headset that supports URP Application Spacewarp</li>
+</ul>
+
+<p>
+<strong>Note:</strong> Refer to your device’s documentation and specifications to determine whether it supports the OpenXR <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_space_warp">XR_FB_space_warp</a> extension. (You can also look at the Android logs from a device to make sure that the extension is enabled successfully when you test your app.)</p>
+
+<h2 id="understand-spacewarp">Understand URP Application Spacewarp</h2>
+
+<p>URP Application Spacewarp synthesizes every other frame using data from previous frames. In addition to the standard eye buffer for the rendered <span class="tooltip"><strong>scene</strong><span class="tooltiptext">A Scene contains the environments and menus of your game. Think of each unique Scene file as a unique level. In each Scene, you place your environments, obstacles, and decorations, essentially designing and building your game in pieces. <a class="tooltipMoreInfoLink" href="CreatingScenes.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Scene">Glossary</a></span></span></span>, spacewarp requires a motion vector buffer and a <span class="tooltip"><strong>depth buffer</strong><span class="tooltiptext">A memory store that holds the z-value depth of each pixel in an image, where the z-value is the depth for each rendered pixel from the projection plane. <a class="tooltipMoreInfoLink" href="class-RenderTexture.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#depthbuffer">Glossary</a></span></span></span>. The URP XR Pass renders these to low resolution motion vector and depth buffers.</p>
+
+<p>To synthesize a frame, spacewarp shifts <span class="tooltip"><strong>pixels</strong><span class="tooltiptext">The smallest unit in a computer image. Pixel size depends on your screen resolution. Pixel lighting is calculated at every screen pixel. <a class="tooltipMoreInfoLink" href="ShadowPerformance.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#pixel">Glossary</a></span></span></span> from the previous rendered frame to a new, extrapolated position based on the motion vectors and depth. To decrease latency, the frame is reprojected using positional timewarp based on the latest available input pose. </p>
+
+<p>
+<strong>Note</strong>: Positional timewarp is a more effective form of reprojection that uses the update pose along with depth information to both translate and rotate the final frame. Technically, positional timewarp is a different feature than application spacewarp. Meta headsets automatically turn on positional timewarp when application spacewarp is active. Other headsets might not.</p>
+
+<p>For additional information about Application Spacewarp on Meta devices, refer to <a href="https://developers.meta.com/horizon/documentation/unity/unity-asw/">Application Spacewarp Developer Guide (Meta)</a>.</p>
+
+<h3 id="limitations">Limitations of spacewarp</h3>
+
+<ul>
+<li>While spacewarp can improve your app’s rendering performance, it doesn’t simply double your frame rate. (Meta estimates a 70% improvement in the best cases for Quest headsets.) However, spacewarp doesn’t work at all if your frame rate is already very low (around 18 fps or less).</li>
+<li>Frame synthesis can introduce visual artifacts such as distortion and stuttering. Refer to <a href="#visual-artifacts">Visual artifacts</a>.</li>
+<li>Not all objects can have spacewarp applied to them, which means they effectively render at half the framerate. Refer to <a href="#unwarped-objects">Unwarped objects</a>.</li>
+<li>Unity does not support using spacewarp in the <a href="urp/compatibility-mode.html">URP compatibility mode</a>.</li>
+</ul>
+
+<h3 id="visual-artifacts">Visual artifacts</h3>
+
+<p>Application spacewarp can cause visual artifacts. You should evaluate whether the benefits of spacewarp outweigh observed problems.</p>
+
+<h4 id="unwarped-objects">Unwarped objects</h4>
+
+<p>If a moving object does not have motion vectors, then it can appear to stutter as it moves because its position is only updated in the rendered frames, not the synthesized frames. Still, there might be cases where things look better without spacewarp. </p>
+
+<p>You can apply spacewarp to specific objects by changing the <strong>XR Motion Vectors Pass (Space Warp)</strong> property of their assigned Material. Objects with <strong>XR Motion Vectors Pass (Space Warp)</strong> disabled are not warped. Refer to <a href="#materials">Configure Materials for spacewarp</a> for more information.</p>
+
+<figure>
+<img src="../uploads/Main/xr-motion-vector-material-option.png" alt="Material Inspector showing Advanced Options section.">
+<figcaption>Material Inspector showing Advanced Options section.</figcaption>
+</figure>
+
+<p>Unity also does not apply spacewarp to:</p>
+
+<ul>
+<li><span class="tooltip"><strong>Particle systems</strong><span class="tooltiptext">A component that simulates fluid entities such as liquids, clouds and flames by generating and animating large numbers of small 2D images in the scene. <a class="tooltipMoreInfoLink" href="class-ParticleSystem.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#particlesystem">Glossary</a></span></span></span></li>
+<li>Objects that use materials with shaders that don’t support spacewarp</li>
+<li>Composition layers (only the default scene layer is warped)</li>
+</ul>
+
+<h4 id="transparent-objects">Transparent objects</h4>
+
+<p>Spacewarp can cause artifacts when applied to transparent objects because the movement of objects behind a transparent object isn’t captured in the motion vector and depth buffers. The artifacts can be more obvious when close to the <span class="tooltip"><strong>camera</strong><span class="tooltiptext">A component which creates an image of a particular viewpoint in your scene. The output is either drawn to the screen or captured as a texture. <a class="tooltipMoreInfoLink" href="CamerasOverview.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Camera">Glossary</a></span></span></span>. </p>
+
+<p>In some cases, you can mitigate artifacts related to transparency by rendering such content to a composition layer. However, spacewarp is not applied to composition layers, so animation within a layer might appear choppy.</p>
+
+<h4 id="fast-objects">Fast-moving objects</h4>
+
+<p>Objects moving with a high apparent velocity can create noticeable artifacts. When spacewarp moves the pixels rendered for an object, the algorithm distorts the background to fill any empty areas left in the object’s wake. The more area an object covers and the farther it moves across the screen, the more likely this distortion will be noticeable. The characteristics of the background behind the object can also make a difference. For example a regular grid with straight lines might show the effects of the distortion more readily than a noisy texture. Objects that you “teleport” from one location to another can cause visual artifacts in the same manner.</p>
+
+<p>In particular, you should evaluate the appearance of controller or hand graphics in your app. These are always close to the user, take up a large portion of the screen, and move at a high apparent velocity, all of which can accentuate spacewarp-related artifacts.</p>
+
+<h2 id="workflow">Application Spacewarp workflow</h2>
+
+<p>To enable and use URP Application Spacewarp in your project, complete the following steps: </p>
+
+<ol>
+<li>
+<a href="#enable-spacewarp">Enable the OpenXR spacewarp feature</a> in the Editor.</li>
+<li>
+<a href="#control-spacewarp">Control spacewarp at runtime</a>.</li>
+<li>
+<a href="#materials">Configure Materials for spacewarp</a>.</li>
+<li>
+<a href="#modify-custom-shaders">Modify custom shaders</a> to support spacewarp, if necessary.</li>
+</ol>
+
+<h2 id="enable-spacewarp">Enable the OpenXR spacewarp feature in the Editor</h2>
+
+<p>You can enable URP Application Spacewarp in two ways:</p>
+
+<ul>
+<li>Use the Meta SDK (for Meta headsets).</li>
+<li>Add an OpenXR feature descriptor and import the required library functions manually.</li>
+</ul>
+
+<p>If you are developing for the Meta platform and using Meta’s SDK packages already, use the Meta SDK to enable Application Spacewarp also.</p>
+
+<p>If you are developing for a non-Meta headset that supports spacewarp or don’t want to add the Meta SDK packages and assets to your project, then you should use the manual method to add the OpenXR feature descriptor.</p>
+
+<h3 id="enable-spacewarp-meta-sdk">Enable spacewarp with the Meta SDK</h3>
+
+<p>To enable Application Spacewarp when using the Meta SDK package:</p>
+
+<ol>
+<li>Obtain the <a href="https://assetstore.unity.com/packages/tools/integration/meta-xr-core-sdk-269169">Meta Core SDK package</a> from the Unity <span class="tooltip"><strong>Asset Store</strong><span class="tooltiptext">A growing library of free and commercial assets created by Unity and members of the community. Offers a wide variety of assets, from textures, models and animations to whole project examples, tutorials and Editor extensions. <a class="tooltipMoreInfoLink" href="AssetStore.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#AssetStore">Glossary</a></span></span></span>.</li>
+<li>Install the package in your project with the Unity Package Manager.</li>
+<li>Open the <strong><span class="tooltip"><strong>Project Settings</strong><span class="tooltiptext">A broad collection of settings which allow you to configure how Physics, Audio, Networking, Graphics, Input and many other areas of your project behave. <a class="tooltipMoreInfoLink" href="comp-ManagerGroup.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#ProjectSettings">Glossary</a></span></span></span></strong> window.</li>
+<li>Choose the <strong>OpenXR</strong> settings page under <strong>XR <span class="tooltip"><strong>Plug-in</strong><span class="tooltiptext">A set of code created outside of Unity that creates functionality in Unity. There are two kinds of plug-ins you can use in Unity: Managed plug-ins (managed .NET assemblies created with tools like Visual Studio) and Native plug-ins (platform-specific native code libraries). <a class="tooltipMoreInfoLink" href="./plug-ins.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Plug-in">Glossary</a></span></span></span> Management</strong>,.</li>
+<li>Select the Android tab.</li>
+<li>Under <strong>OpenXR Feature Groups</strong>, enable <strong>Meta XR Spacewarp</strong>.</li>
+</ol>
+
+<figure>
+<img src="../uploads/Main/xr-spacewarp-meta-feature.png" alt="OpenXR settings page showing spacewarp feature option added by Meta SDK.">
+<figcaption>OpenXR settings page showing spacewarp feature option added by Meta SDK.</figcaption>
+</figure>
+
+<p>
+<strong>Note:</strong> You must also enable the feature at runtime and for some XR platforms, including Meta, you must update the camera position and rotation every frame.</p>
+
+<p>
+<strong>Note:</strong> In the past, a customized fork of URP was required to support the XR motion vector buffer required by Spacewarp. You no longer need to use this modified version as of URP 17.0.3.</p>
+
+<h3 id="enable-spacewarp-manual">Enable spacewarp manually</h3>
+
+<p>To manually enable the URP Application Spacewarp feature, you must:</p>
+
+<ol>
+<li>Extend the <a href="https://docs.unity3d.com/Packages/com.unity.xr.openxr@latest?subfolder=/api/UnityEngine.XR.OpenXR.Features.OpenXRFeature.html">OpenXRFeature</a> class to declare the spacewarp feature with an <a href="https://docs.unity3d.com/Packages/com.unity.xr.openxr@latest?subfolder=/api/UnityEditor.XR.OpenXR.Features.OpenXRFeatureAttribute.html">OpenXRFeature attribute</a>.</li>
+<li>Import the <code>MetaSetSpaceWarp</code>, <code>MetaSetAppSpacePosition</code>, and <code>MetaSetAppSpaceRotation</code> functions from the UnityOpenXR dll library. (This library is part of the OpenXR package.)</li>
+<li>Enable the <strong>XR Space Warp</strong> feature in the OpenXR Feature Groups list for the OpenXR platforms you are targeting. Refer to <a href="https://docs.unity3d.com/Packages/com.unity.xr.openxr@latest?subfolder=/manual/project-configuration.html">OpenXR: Project configuration</a> for information about how to find and change OpenXR settings.</li>
+</ol>
+
+<p>The <a href="#spacewarp-feature-code">example script</a> performs the first two steps. When you include the script in your project, it adds the <strong>URP Application Spacewarp</strong> option to the OpenXR settings page.</p>
+
+<figure>
+<img src="../uploads/Main/xr-spacewarp-openxr-feature.png" alt="OpenXR settings page showing the spacewarp feature option added by a custom feature declaration.">
+<figcaption>OpenXR settings page showing the spacewarp feature option added by a custom feature declaration.</figcaption>
+</figure>
+
+<p>The following script adds the feature descriptor and imports the required functions from the UnityOpenXR library:</p>
+
+<p><a id="spacewarp-feature-code" aria-hidden="true"></a></p>
+
+<pre><code class="lang-cs">using System.Runtime.InteropServices;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.XR.OpenXR;
+using UnityEngine.XR.OpenXR.Features;
+
+
+#if UNITY_EDITOR
+// OpenXR feature declaration.
+[UnityEditor.XR.OpenXR.Features.OpenXRFeature(UiName = &quot;URP Application Spacewarp&quot;,
+    Desc=@&quot;URP Application Spacewarp feature&quot;,
+    Company = &quot;Unity&quot;,
+    DocumentationLink = &quot;&quot;,
+    OpenxrExtensionStrings = &quot;XR_FB_space_warp&quot;,
+    Version = &quot;1.0.0&quot;,
+    BuildTargetGroups = new []{BuildTargetGroup.Android},
+    FeatureId = featureId)]
+#endif
+public class SpacewarpFeature : OpenXRFeature
+{
+    // The feature id string. This is used to give the feature a well known id for reference.
+    public const string featureId = &quot;com.unity.openxr.feature.Spacewarp&quot;;
+
+
+    // Turn spacewarp on or off.
+    public static bool SetSpacewarp(bool enabled)
+    {
+        return MetaSetSpaceWarp(enabled);
+    }
+
+    // Update spacewarp for camera movement.
+    public static bool SetAppSpaceTransform(Vector3 position, Quaternion rotation)
+    {
+        return MetaSetAppSpacePosition(
+                   position.x,
+                   position.y,
+                   position.z)
+               &amp;&amp;
+               MetaSetAppSpaceRotation(
+                   rotation.x,
+                   rotation.y,
+                   rotation.z,
+                   rotation.w);
+    }
+
+    // Import functions from the UnityOpenXR dll.
+    [DllImport(&quot;UnityOpenXR&quot;, EntryPoint = &quot;MetaSetSpaceWarp&quot;)]
+    private static extern bool MetaSetSpaceWarp(bool enabled);
+
+    [DllImport(&quot;UnityOpenXR&quot;, EntryPoint = &quot;MetaSetAppSpacePosition&quot;)]
+    private static extern bool MetaSetAppSpacePosition(float x, float y, float z);
+
+    [DllImport(&quot;UnityOpenXR&quot;, EntryPoint = &quot;MetaSetAppSpaceRotation&quot;)]
+    private static extern bool MetaSetAppSpaceRotation(float x, float y, float z, float w);
+}
+
+
+</code></pre>
+
+<p>
+<strong>Note</strong>: In the future, this technique of manually adding the spacewarp feature descriptor and importing the related functions from the OpenXR package libraries might be superseded in an update to the Unity OpenXR packages. You should keep your version of the <code>SpacewarpFeature</code> class as simple as possible to make it easy to replace when this happens.</p>
+
+<p>Once you have added this script to your project, enable spacewarp by adding a script to your scene that calls <code>SetSpacewarp(true)</code>. Depending on your headset, you might need to also update Position and Rotation via the other two functions with the main camera’s position and rotation. Refer to your headset’s specifications to see whether it’s required.</p>
+
+<h2 id="control-spacewarp">Control spacewarp at runtime</h2>
+
+<p>In addition to enabling URP Application Spacewarp in your XR settings for the project, you must also turn spacewarp on at runtime.</p>
+
+<p>To turn spacewarp on, call the <code>SpacewarpFeature.SetSpacewarp</code> function defined in the <a href="#spacewarp-feature-code">SpacewarpFeature example script</a>. Pass <code>true</code> to enable spacewarp and <code>false</code> to turn it off.</p>
+
+<p>
+<strong>Note:</strong> If you’re using the Meta SDK, call <code>OVRManager.SetSpaceWarp(true)</code> to turn on the spacewarp feature.</p>
+
+<p>On Meta headsets, you must call functions to update the position and rotation of the main camera every frame. (See the documentation for your headset for other devices or if you are using the Meta SDK.)</p>
+
+<p>If you are using the <a href="#spacewarp-feature-code">SpacewarpFeature example script</a>, you can enable and control spacewarp by adding the following MonoBehaviour to your scene’s main Camera object:</p>
+
+<pre><code class="lang-cs">using UnityEngine;
+
+// Add to main scene camera
+public class SpacewarpController : MonoBehaviour
+{
+    void Start()
+    {
+        // Enable spacewarp when scene loads
+        SpacewarpFeature.SetSpacewarp(true);
+    }
+
+    void Update()
+    {
+        // Update spacewarp with camera position and rotation
+        SpacewarpFeature.SetAppSpaceTransform(transform.position, transform.rotation);
+    }
+}
+</code></pre>
+
+<h2 id="choose-shaders">Choose shaders compatible with spacewarp</h2>
+
+<p>URP Application Spacewarp requires shaders that record XR motion vectors, which are used to predict the position of pixels in the extrapolated frames. If you use a shader that doesn’t record XR motion vectors, rendered objects that use it won’t update in the synthesized frames. These objects might appear to stutter because they are effectively rendered at half the framerate. Refer to <a href="#understand-spacewarp">Understand URP Application Spacewarp</a> for information about how spacewarp works.
+The following URP base shaders are spacewarp compatible:</p>
+
+<ul>
+<li><a href="urp/lit-shader.html">Lit</a></li>
+<li><a href="urp/unlit-shader.html">Unlit</a></li>
+<li><a href="urp/shader-complex-lit.html">Complex Lit</a></li>
+<li><a href="urp/simple-lit-shader.html">Simple Lit</a></li>
+<li><a href="urp/baked-lit-shader.html">Baked Lit</a></li>
+</ul>
+
+<p>For Shadergraph, the following <strong>Material</strong> options for the <strong>Universal</strong> <a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@17.0/manual/Graph-Target.html">Graph Target</a> are spacewarp compatible:</p>
+
+<ul>
+<li>Lit</li>
+<li>Unlit</li>
+</ul>
+
+<h2 id="modify-custom-shaders">Modify custom shaders to support spacewarp</h2>
+
+<p>To enable your custom shaders to work with URP Application Spacewarp, you must add support for the XRMotionVectors render pass.</p>
+
+<p>First, add the <code>_XRMotionVectorsPass</code> property to your shader. This property allows you to enable spacewarp on a per-material basis. (Refer to <a href="#materials">Configure Materials for spacewarp</a> for information about how it works with the URP shaders that support spacewarp.)</p>
+
+<pre><code class="lang-hlsl">[HideInInspector] _XRMotionVectorsPass(&quot;_XRMotionVectorsPass&quot;, Float) = 1.0
+</code></pre>
+
+<p>Next, add the following shader subpass declaration:</p>
+
+<pre><code class="lang-hlsl">Pass
+{
+        Name &quot;XRMotionVectors&quot;
+        Tags { &quot;LightMode&quot; = &quot;XRMotionVectors&quot; }
+        ColorMask RGBA
+
+        // Stencil write for obj motion pixels
+        Stencil
+        {
+        WriteMask 1
+                Ref 1
+                Comp Always
+                Pass Replace
+        }
+
+        HLSLPROGRAM
+        #pragma shader_feature_local _ALPHATEST_ON
+        #pragma multi_compile _ LOD_FADE_CROSSFADE
+        #pragma shader_feature_local_vertex _ADD_PRECOMPUTED_VELOCITY
+        #define APPLICATION_SPACE_WARP_MOTION 1
+
+        #include &quot;Packages/com.unity.render-pipelines.universal/Shaders/BakedLitInput.hlsl&quot;
+        #include_with_pragmas &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/ObjectMotionVectors.hlsl&quot;
+        ENDHLSL
+  }
+</code></pre>
+
+<h2 id="materials">Configure Materials for spacewarp</h2>
+
+<p>You can apply URP Application Spacewarp to specific objects by changing the <strong>XR Motion Vectors Pass (Space Warp)</strong> property of their assigned Material. You can find the <strong>XR Motion Vectors Pass (Space Warp)</strong> property in the <strong>Advanced Options</strong> section of the <strong><span class="tooltip"><strong>Inspector</strong><span class="tooltiptext">A Unity window that displays information about the currently selected GameObject, asset or project settings, allowing you to inspect and edit the values. <a class="tooltipMoreInfoLink" href="UsingTheInspector.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Inspector">Glossary</a></span></span></span></strong> window for a Material. Objects with <strong>XR Motion Vectors Pass (Space Warp)</strong> disabled are not warped.</p>
+
+<figure>
+<img src="../uploads/Main/xr-motion-vector-material-option.png" alt="Material Inspector showing Advanced Options section.">
+<figcaption>Material Inspector showing Advanced Options section.</figcaption>
+</figure>
+
+<p>
+<strong>Tip</strong>: If the <strong>XR Motion Vectors Pass (Space Warp)</strong> option is disabled or missing, make sure that your Unity project meets the <a href="#prerequisites">Prerequisites</a> for using URP Application Spacewarp.</p>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="VRFrameTiming.html"></a></span><div class="tip">VR frame timing </div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="xr-untethered-device-optimization.html"></a></span><div class="tip">Optimize for untethered XR devices in URP</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

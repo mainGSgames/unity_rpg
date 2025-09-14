@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Introduction to runtime asset management</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/assets-managing-introduction.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../StaticFilesManual/css/prism.css">
+<script src="../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="index.html" class="selected">Manual</a></li>
+<li><a href="../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/assets-managing-introduction.html">English</a></li>
+<li><a href="/cn/current/Manual/assets-managing-introduction.html">中文</a></li>
+<li><a href="/ja/current/Manual/assets-managing-introduction.html">日本語</a></li>
+<li><a href="/kr/current/Manual/assets-managing-introduction.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/assets-managing-introduction.html">English</a></li>
+<li><a href="/cn/current/Manual/assets-managing-introduction.html">中文</a></li>
+<li><a href="/ja/current/Manual/assets-managing-introduction.html">日本語</a></li>
+<li><a href="/kr/current/Manual/assets-managing-introduction.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="assets-and-media.html">Assets and media</a></li>
+<li><a href="assets-managing-runtime.html">Managing assets at runtime</a></li>
+<li>Introduction to runtime asset management</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="assets-managing-runtime.html"></a></span><div class="tip">Managing assets at runtime</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="assets-direct-reference.html"></a></span><div class="tip">Direct reference asset management</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Introduction to runtime asset management</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>How you load and manage assets in your project impacts on your application’s memory usage, load times, and build size. Unity provides several asset management systems, each designed for specific use cases and project sizes. Small applications with fixed content sizes can usually use Unity’s <a href="#direct-references">default asset management system</a>. Systems like <a href="#assetbundle-system">AssetBundles</a> and <a href="#addressables-package">Addressables</a> provide better management for complex asset layouts, or applications that need to stream assets from remote servers.</p>
+
+<h2>Effect of runtime asset management on builds</h2>
+
+<p>By default, Unity uses the <a href="build-profile-scene-list.html">Scene List</a> to determine which scenes and assets to include in a build and their load order. Unity only includes scenes in the <span class="tooltip"><strong>Scene</strong><span class="tooltiptext">A Scene contains the environments and menus of your game. Think of each unique Scene file as a unique level. In each Scene, you place your environments, obstacles, and decorations, essentially designing and building your game in pieces. <a class="tooltipMoreInfoLink" href="CreatingScenes.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Scene">Glossary</a></span></span></span> List in a build, and unused scenes and assets not referenced from these scenes are excluded from a build. You can also use the <a href="../ScriptReference/SceneManagement.SceneManager.html"><code>SceneManager</code> API</a> to determine how to load scenes in your project.</p>
+
+<p>The exception to this is if you include any scenes in a <a href="#resources-system">Resources folder</a>, or mark them as <a href="#addressables-package">Addressable</a>, then Unity handles scenes differently. </p>
+
+<p>To determine what content to build, Unity uses the following information:</p>
+
+<ul>
+<li>Scenes included in the <a href="build-profile-scene-list.html">Scene List</a>.</li>
+<li>Any <a href="Preferences.html">Preferences</a> that affect building.</li>
+<li>Any assets <a href="#direct-references">directly referenced</a>.</li>
+<li>If you use the <a href="#resources-system">Resources system</a>, Unity includes any assets in the <code>Resources</code> folder.</li>
+<li>If you use <a href="#assetbundle-system">AssetBundles</a>, Unity includes any assets and scenes assigned to an AssetBundle, plus any direct references from those assets or scenes.</li>
+<li>If you use <a href="#addressables-package">Addressables</a>, Unity includes any assets and scenes assigned to an Addressable group, plus any direct references from those assets or scenes.</li>
+</ul>
+
+<h2>Runtime asset management options</h2>
+
+<p>Choosing the right approach depends on factors like your target platform, content delivery requirements, and whether you need dynamic loading capabilities. The following management systems are available:</p>
+
+<ul>
+<li>
+<a href="#direct-references">Direct references</a>: The default way of managing assets. Unity loads all assets referenced in a scene into memory before loading.</li>
+<li>
+<a href="#resources-system">The Resources system</a>: Loads and unload assets in the <code>Resources</code> folders in your project with the <code>Resources</code> API.</li>
+<li>
+<a href="#assetbundle-system">The AssetBundle system</a>: Organize assets into AssetBundles with the <code>AssetBundle</code> API. You can then store AssetBundles remotely and download on demand.</li>
+<li>
+<a href="#addressables-package">The Addressables package</a>: Built on top of the <code>AssetBundle</code> API, it automates a lot of the manual processes that the AssetBundle system has, and provides a Unity Editor interface.</li>
+<li>
+<a href="#ecs-content-management-system">ECS content management system</a>: If you use the <a href="https://docs.unity3d.com/Packages/com.unity.entities@latest">Entities package</a> in your project, then it has its own content management system.</li>
+</ul>
+
+<p><a id="direct-references" aria-hidden="true"></a></p>
+
+<h3>Direct references</h3>
+
+<p>Direct reference asset management is the default way of managing assets at runtime in Unity. Whenever you drag an asset into a scene or onto a component through the <span class="tooltip"><strong>Inspector</strong><span class="tooltiptext">A Unity window that displays information about the currently selected GameObject, asset or project settings, allowing you to inspect and edit the values. <a class="tooltipMoreInfoLink" href="UsingTheInspector.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Inspector">Glossary</a></span></span></span> window of the Unity Editor, you create a direct reference to that asset. When you build your application, Unity saves any referenced assets in a separate file associated with the scenes in your project. </p>
+
+<p>You can use direct references with <code>ScriptableObject</code> instances to efficiently manage large asset sets and reduce build sizes. A benefit of only using direct references is that Unity only includes assets that your project directly references in the build, so your application doesn’t load unnecessary or duplicated assets.</p>
+
+<p>Direct references have some limitations, as follows:</p>
+
+<ul>
+<li>When your application runs on the target device, Unity loads the entire asset file into memory before loading a scene. This approach isn’t dynamic and you can only load or unload a scene, which might lead to slow load times, especially on devices with less memory.</li>
+<li>You can’t use assets that are hosted on a content delivery network (CDN).</li>
+<li>You can’t make incremental content updates and need to rebuild and redeploy your entire application if you want to make changes.</li>
+</ul>
+
+<p>For more information, refer to <a href="assets-direct-reference.html">Direct reference asset management</a>. </p>
+
+<p><a id="resources-system" aria-hidden="true"></a></p>
+
+<h3>Resources system</h3>
+
+<p>The <a href="LoadingResourcesatRuntime.html">Resources system</a> provides a simple way of managing assets in memory. To use the Resources system, you create a folder called <code>Resources</code> in your project and add assets to it. During the build process, Unity finds the assets in the <code>Resources</code> folder and bundles them into a serialized file with metadata and indexing information. You can then use the <a href="../ScriptReference/Resources.html"><code>Resources</code></a> API to load and unload the assets in your application.</p>
+
+<p>The Resources system has the following limitations:</p>
+
+<ul>
+<li>Assets in <code>Resources</code> folders are always included in the Player build, even if they’re not referenced by anything. This can lead to large build sizes.</li>
+<li>If you need to make changes to the assets in your project, you need to rebuild and redeploy your entire application, whereas AssetBundles and Addressables allow you to create incremental content updates.</li>
+<li>It doesn’t support content delivery from a remote server.</li>
+<li>Assets loaded with <code>Resources.Load</code> remain in memory until explicitly unloaded with <code>Resources.UnloadUnusedAssets</code>, which unloads all unused assets loaded by <code>Resources</code>, or until the scene that used them is unloaded.</li>
+<li>If you have a lot of assets in the <code>Resources</code> folder, then building and starting your application can take a long time.</li>
+<li>If your code loads an asset by string, but that asset is missing, then <code>Resources.Load</code> returns <code>null</code> and becomes a runtime error, so you need to manually track which assets are needed.</li>
+</ul>
+
+<p>It’s an ideal system for prototyping, or for smaller projects which need assets throughout the lifetime of the application. For more information, refer to <a href="assetbundles-section.html">Use AssetBundles to load assets at runtime</a>.</p>
+
+<p><a id="assetbundle-system" aria-hidden="true"></a></p>
+
+<h3>AssetBundle system</h3>
+
+<p>Use the <a href="AssetBundlesIntro.html">AssetBundle system</a> to organize assets into separate container files called AssetBundles. You can store AssetBundle files in your project files, or remotely in the cloud.</p>
+
+<p>The <a href="../ScriptReference/AssetBundle.html"><code>AssetBundle</code> API</a> minimizes the impact on network and system resources by allowing you to download AssetBundles on demand. You can use this on-demand behavior to add DLC and post-release content updates to your application. For example, you can deliver new content for your game without requiring users to download a new version of your game. The <code>AssetBundle</code> API then provides a way to load and unload assets from downloaded bundles. </p>
+
+<p>The AssetBundle system has the following limitations:</p>
+
+<ul>
+<li>You can only use AssetBundles in <span class="tooltip"><strong>scripts</strong><span class="tooltiptext">A piece of code that allows you to create your own Components, trigger game events, modify Component properties over time and respond to user input in any way you like. <a class="tooltipMoreInfoLink" href="creating-scripts.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Scripts">Glossary</a></span></span></span>, and there’s no Editor interface to build AssetBundles with.</li>
+<li>The <code>AssetBundle</code> API doesn’t keep track of asset dependencies. For example, if you want to load a <span class="tooltip"><strong>prefab</strong><span class="tooltiptext">An asset type that allows you to store a GameObject complete with components and properties. The prefab acts as a template from which you can create new object instances in the scene. <a class="tooltipMoreInfoLink" href="Prefabs.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="Glossary.html#Prefab">Glossary</a></span></span></span> from an AssetBundle, you need to manually load the AssetBundles, and any AssetBundle that the AssetBundle depends on, before loading the prefab. Safely unloading AssetBundles often requires writing a reference counting system. For more information, refer to <a href="AssetBundles-Dependencies.html">Handling dependencies between AssetBundles</a>.</li>
+<li>You need to manually allocate and deallocate memory, so you might create memory leaks or missing content by unloading assets from an AssetBundle that other code relies on.</li>
+<li>The <code>AssetBundle</code> API isn’t aware of whether an AssetBundle is hosted locally or remotely, so you need to keep track of the location of all the AssetBundles in your project.</li>
+</ul>
+
+<p>For more information, refer to <a href="AssetBundlesIntro.html">Introduction to AssetBundles</a>.</p>
+
+<p><a id="addressables-package" aria-hidden="true"></a></p>
+
+<h3>Addressables package</h3>
+
+<p>The <a href="https://docs.unity3d.com/Packages/com.unity.addressables@latest">Addressables package</a> provides a user interface in the Unity Editor to manage and organize the assets in your project. It’s built on top of the <code>AssetBundle</code> API and automatically manages dependencies, asset locations, and memory allocation, which you otherwise have to handle manually in the AssetBundle system. The Addressables package aims to remove the limitations of the Resources and AssetBundle system to make it easier to manage assets on demand.</p>
+
+<p>Once you have made an asset Addressable, you can reference it by address in your code, rather than by its file name or AssetBundle location, which means you can change the location of an asset without needing to rewrite any code. You can also use asset references to dynamically load and unload assets, so that you don’t have to keep all assets in the scene in memory at all times. </p>
+
+<p>The Addressables system is designed for applications that have assets stored on a CDN, and those that are likely to have content updates over time. If your application has fixed content which is shipped in the initial download, then using direct references, or the Resources system is a better alternative to Addressables or AssetBundles.</p>
+
+<p>For more information, refer to <a href="https://docs.unity3d.com/Packages/com.unity.addressables@latest/index.html?subfolder=/manual/AddressableAssetsOverview.html">Addressables overview</a>
+</p>
+
+<p><a id="ecs-content-management-system" aria-hidden="true"></a></p>
+
+<h3>ECS content management system</h3>
+
+<p>The Entities package has its own <a href="https://docs.unity3d.com/Packages/com.unity.entities@latest/index.html?subfolder=/manual/content-management.html">content management system</a>, where you use weak references to assets to load them at runtime. You can also create content archives to deliver content to an application. For more information, refer to <a href="https://docs.unity3d.com/Packages/com.unity.entities@latest/index.html?subfolder=/manual/content-management-intro.html">Introduction to content management</a>.</p>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li><a href="assets-direct-reference.html">Direct reference asset management</a></li>
+<li><a href="assets-resources-system.html">Use the Resources system to load assets at runtime</a></li>
+<li><a href="assetbundles-section.html">Use AssetBundles to load assets at runtime</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.addressables@latest">Addressables package</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.entities@latest">Entities package</a></li>
+</ul>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="assets-managing-runtime.html"></a></span><div class="tip">Managing assets at runtime</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="assets-direct-reference.html"></a></span><div class="tip">Direct reference asset management</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

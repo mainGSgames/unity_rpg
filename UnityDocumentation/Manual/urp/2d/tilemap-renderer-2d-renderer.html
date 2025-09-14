@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Enable 2D lighting with the Tilemap Renderer in URP</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="../../">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../../../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../../../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/urp/2d/tilemap-renderer-2d-renderer.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../../../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../../../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../../../StaticFilesManual/css/prism.css">
+<script src="../../../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../../../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../../../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../../../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="../../30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="../../index.html" class="selected">Manual</a></li>
+<li><a href="../../../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/2d/tilemap-renderer-2d-renderer.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/2d/tilemap-renderer-2d-renderer.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/2d/tilemap-renderer-2d-renderer.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="../../Unity2D.html">2D game development</a></li>
+<li><a href="../../2d-urp-landing.html">2D game development in URP</a></li>
+<li><a href="../../urp/2d-index.html">2D lighting in URP</a></li>
+<li>Enable 2D lighting with the Tilemap Renderer in URP</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/PrepShader.html"></a></span><div class="tip">Prepare and upgrade sprites for 2D lighting in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/2d-light-blending.html"></a></span><div class="tip">Blend Modes in 2D lighting</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Enable 2D lighting with the Tilemap Renderer in URP</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>To enable 2D lighting in URP, set up the required settings to use the Tilemap Renderer component.</p>
+
+<p>You can use the Tilemap Renderer with URP 2D to enable <a href="../Lights-2D-intro.html">2D lighting</a> on <span class="tooltip"><a href="../../tilemaps/tiles-for-tilemaps/tiles-landing.html">tiles</a><span class="tooltiptext">A simple class that allows a sprite to be rendered on a Tilemap. <a class="tooltipMoreInfoLink" href="../../tilemaps/tiles-for-tilemaps/scriptable-tiles/scriptable-tiles-landing.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Tile">Glossary</a></span></span></span> and <span class="tooltip"><a href="../../tilemaps/work-with-tilemaps/work-with-tilemaps-landing.html">tilemaps</a><span class="tooltiptext">A GameObject that allows you to quickly create 2D levels using tiles and a grid overlay. <a class="tooltipMoreInfoLink" href="../../tilemaps/work-with-tilemaps/tilemap-reference.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Tilemap">Glossary</a></span></span></span>, especially <a href="../../tilemaps/work-with-tilemaps/isometric-tilemaps/isometric-tilemap-landing.html">isometric tilemaps</a> which simulate pseudo-depth. Doing so requires you to setup your project and adjust the Tilemap Renderer’s settings in the following ways.</p>
+
+<p>When you select the <a href="../2DRendererData-overview.html">2D Renderer Data asset</a> for your project’s <a href="../../scriptable-render-pipeline-introduction.html">Scriptable Render Pipeline</a>, the Renderer Data asset assumes control of the Tilemap Renderer’s <strong>Transparency Sort Mode</strong> property settings and requires you to adjust the settings under the 2D Renderer Data asset’s property settings instead of in the <span class="tooltip"><strong>Project Settings</strong><span class="tooltiptext">A broad collection of settings which allow you to configure how Physics, Audio, Networking, Graphics, Input and many other areas of your project behave. <a class="tooltipMoreInfoLink" href="../../comp-ManagerGroup.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#ProjectSettings">Glossary</a></span></span></span>.</p>
+
+<p>To optimize the rendering of the Tilemap Renderer component with the 2D lighting system, Unity can batch the rendering of the <a href="../../tilemaps/work-with-tilemaps/tilemap-renderer-reference.html">Tilemap Renderer component</a> with the <a href="../../SRPBatcher.html">Scriptable Render Pipeline Batcher</a> to improve the rendering performance of the Tilemap Renderer with other <span class="tooltip"><strong>sprite</strong><span class="tooltiptext">A 2D graphic objects. If you are used to working in 3D, Sprites are essentially just standard textures but there are special techniques for combining and managing sprite textures for efficiency and convenience during development. <a class="tooltipMoreInfoLink" href="../../sprite/sprite-landing.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Sprite">Glossary</a></span></span></span> renderers with the same rendering characteristics.</p>
+
+<h2>Adjusting the Transparency Sort Mode settings in the 2D Renderer Data asset</h2>
+
+<p>When you <a href="../../tilemaps/work-with-tilemaps/isometric-tilemaps/isometric-tilemap-landing.html">create an isometric tilemap</a>, one of the steps requires you to set the <strong>Transparency Sort Mode</strong> (<strong>Edit</strong> &gt; <strong>Project Settings…</strong> &gt; <strong>Graphics</strong> &gt; <strong>Camera Settings</strong>) to <strong>Custom Axis</strong> and to set it to the <a href="https://docs.unity3d.com/Manual/Tilemap-Isometric-CreateIso.html#customaxis">required values</a> to have Unity render the Tiles with the pseudo-depth of an isometric perspective.</p>
+
+<figure>
+<img src="../../../uploads/urp/2D/non-renderer2d-project-settings.png" alt="The default location of the Transparency Sort Mode settings when no specific URP Pipeline is selected.">
+<figcaption>The default location of the <strong>Transparency Sort Mode</strong> settings when no specific URP Pipeline is selected.</figcaption>
+</figure>
+
+<p>If you want to use the 2D Renderer with the Tilemap Renderer in your Project, first create the URP Asset and its associated 2D Renderer Data asset by right-clicking the Asset window and go to <strong>Create &gt; Rendering &gt; URP Asset (with 2D Renderer)</strong>. Then go to your Project’s <strong>Scriptable Render Pipeline Settings</strong> (menu: <strong>Edit &gt; Project Settings… &gt; Graphics</strong>) and select the Universal Render Pipeline (URP) 2D asset.</p>
+
+<p>When you do so, the <strong><span class="tooltip"><strong>Camera</strong><span class="tooltiptext">A component which creates an image of a particular viewpoint in your scene. The output is either drawn to the screen or captured as a texture. <a class="tooltipMoreInfoLink" href="../../CamerasOverview.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Camera">Glossary</a></span></span></span> Settings</strong> (including the <strong>Transparency Sort Mode</strong> property) become hidden.</p>
+
+<figure>
+<img src="../../../uploads/urp/2D/renderer-2d-selected.png" alt="Camera Settings hidden after selecting a Universal Render Pipeline Asset.">
+<figcaption>Camera Settings hidden after selecting a Universal Render Pipeline Asset.</figcaption>
+</figure>
+
+<p>The 2D Renderer Data asset now controls the <strong>Transparency Sort Mode</strong> property settings, and the values set in the active Renderer 2D Data asset supersedes the values set in the <strong>Project Settings</strong>. Select the 2D Renderer Data asset go to its <span class="tooltip"><strong>Inspector</strong><span class="tooltiptext">A Unity window that displays information about the currently selected GameObject, asset or project settings, allowing you to inspect and edit the values. <a class="tooltipMoreInfoLink" href="../../UsingTheInspector.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Inspector">Glossary</a></span></span></span> window. In the General section, set <strong>Transparency Sort Mode</strong> to <strong>Custom Axis</strong>.</p>
+
+<figure>
+<img src="../../../uploads/urp/2D/renderer-2d-custom-axis.png" alt="Select Custom Axis in the 2D Renderer Data asset.">
+<figcaption>Select <strong>Custom Axis</strong> in the 2D Renderer Data asset.</figcaption>
+</figure>
+
+<p>The <strong>Transparency Sort Axis</strong> property settings then become available. Use the same values for the <strong>Transparency Sort Axis</strong> as those used to for the <a href="https://docs.unity3d.com/Manual/Tilemap-Isometric-CreateIso.html#customaxis">rendering of tiles on an isometric tilemap</a>.</p>
+
+<figure>
+<img src="../../../uploads/urp/2D/renderer-data-asset-properties.png" alt="The Transparency Sort Axis setting for isometric tilemaps in the Renderer 2D asset properties.">
+<figcaption>The <strong>Transparency Sort Axis</strong> setting for isometric tilemaps in the Renderer 2D asset properties.</figcaption>
+</figure>
+
+<h2>Enabling the Scriptable Render Pipeline Batcher</h2>
+
+<p>To prepare the Tilemap Renderer for SRP batching:</p>
+
+<ol>
+<li>Fulfill the requirements and steps for enabling the <a href="https://docs.unity3d.com/Manual/SRPBatcher.html#using-the-srp-batcher">SRP Batcher</a> in URP.</li>
+<li>Select the Tilemap Renderer component and go to its <strong>Mode</strong> property setting.</li>
+<li>Select either <strong>Individual</strong> or <strong>SRP Batch</strong> (only supported in the Universal Render Pipeline version 15 onwards). <strong>Note</strong>: <strong>Chunk</strong> mode is incompatible with the SRP batcher.</li>
+</ol>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li><a href="../../2d-renderer-sorting.html">2D Sorting</a></li>
+<li><a href="../../scriptable-render-pipeline-introduction.html">Scriptable Render Pipeline fundamentals</a></li>
+<li><a href="../../tilemaps/work-with-tilemaps/isometric-tilemaps/isometric-tilemap-landing.html">Isometric Tilemaps</a></li>
+</ul>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/PrepShader.html"></a></span><div class="tip">Prepare and upgrade sprites for 2D lighting in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/2d-light-blending.html"></a></span><div class="tip">Blend Modes in 2D lighting</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

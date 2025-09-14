@@ -46,6 +46,10 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
         // this one is specific to knockback mode
         private Vector3 m_KnockbackVector;
 
+        // Desired facing (for strafing / camera-driven facing)
+        private bool m_HasDesiredFacing;
+        private Vector3 m_DesiredFacing;
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         public bool TeleportModeActivated { get; set; }
 
@@ -116,6 +120,20 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
         {
             m_MovementState = MovementState.PathFollowing;
             m_NavPath.FollowTransform(followTransform);
+        }
+
+        /// <summary>
+        /// Sets a desired facing direction. Used for strafing so facing can be camera-driven.
+        /// </summary>
+        /// <param name="forward">World-space forward (y ignored)</param>
+        public void SetDesiredFacing(Vector3 forward)
+        {
+            forward.y = 0f;
+            if (forward.sqrMagnitude > 0.0001f)
+            {
+                m_DesiredFacing = forward.normalized;
+                m_HasDesiredFacing = true;
+            }
         }
 
         /// <summary>
@@ -199,7 +217,17 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
         private void PerformMovement()
         {
             if (m_MovementState == MovementState.Idle)
+            {
+                // When idle, still allow turning-in-place to align with desired facing (camera-driven)
+                if (m_HasDesiredFacing && m_DesiredFacing.sqrMagnitude > 0.0001f)
+                {
+                    transform.rotation = Quaternion.LookRotation(m_DesiredFacing);
+                    // keep rigidbody in sync
+                    m_Rigidbody.position = transform.position;
+                    m_Rigidbody.rotation = transform.rotation;
+                }
                 return;
+            }
 
             Vector3 movementVector;
 
@@ -242,7 +270,17 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
             }
 
             m_NavMeshAgent.Move(movementVector);
-            transform.rotation = Quaternion.LookRotation(movementVector);
+
+            // Determine facing: during path-following, prefer desired facing if provided (strafe)
+            Vector3 faceDir = movementVector;
+            if (m_MovementState == MovementState.PathFollowing && m_HasDesiredFacing)
+            {
+                faceDir = m_DesiredFacing;
+            }
+            if (faceDir.sqrMagnitude > 0.0001f)
+            {
+                transform.rotation = Quaternion.LookRotation(faceDir);
+            }
 
             // After moving adjust the position of the dynamic rigidbody.
             m_Rigidbody.position = transform.position;

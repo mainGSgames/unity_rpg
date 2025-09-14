@@ -2,7 +2,8 @@
     "name": "Unity.BossRoom.CameraUtils",
     "rootNamespace": "",
     "references": [
-        "Unity.Cinemachine"
+        "Unity.Cinemachine",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

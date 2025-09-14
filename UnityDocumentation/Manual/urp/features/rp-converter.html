@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Convert assets using the Render Pipeline Converter</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="../../">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../../../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../../../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/urp/features/rp-converter.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../../../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../../../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../../../StaticFilesManual/css/prism.css">
+<script src="../../../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../../../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../../../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../../../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="../../30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="../../index.html" class="selected">Manual</a></li>
+<li><a href="../../../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/features/rp-converter.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/features/rp-converter.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/features/rp-converter.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/features/rp-converter.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/features/rp-converter.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/features/rp-converter.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/features/rp-converter.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/features/rp-converter.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="../../render-pipelines.html">Render pipelines</a></li>
+<li><a href="../../universal-render-pipeline.html">Using the Universal Render Pipeline</a></li>
+<li><a href="../../urp/introduction-landing.html">Get started with URP</a></li>
+<li><a href="../../urp/InstallingAndConfiguringURP.html">Installing and upgrading URP</a></li>
+<li><a href="../../urp/upgrading-from-birp.html">Upgrading from the Built-In Render Pipeline to URP</a></li>
+<li>Convert assets using the Render Pipeline Converter</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/upgrading-from-birp.html"></a></span><div class="tip">Upgrading from the Built-In Render Pipeline to URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/upgrade-shaders-landing.html"></a></span><div class="tip">Upgrading shaders to URP from the Built-In Render Pipeline</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Convert assets using the Render Pipeline Converter</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>The <strong><span class="tooltip"><strong>Render Pipeline</strong><span class="tooltiptext">A series of operations that take the contents of a Scene, and displays them on a screen. Unity lets you choose from pre-built render pipelines, or write your own. <a class="tooltipMoreInfoLink" href="../../render-pipelines.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Renderpipeline">Glossary</a></span></span></span> Converter</strong> converts assets made for a Built-In Render Pipeline project to assets compatible with URP.</p>
+
+<blockquote>
+<p>
+<strong>Note</strong>: The conversion process makes irreversible changes to the project. Back up your project before the conversion.</p>
+</blockquote>
+
+<h2>
+<a name="converters" aria-hidden="true"></a>Conversion types and converters</h2>
+
+<p>The Render Pipeline Converter let’s you select one of the following conversion types:</p>
+
+<ul>
+<li><p>Built-In Render Pipeline to URP</p></li>
+<li><p>Built-In Render Pipeline 2D to URP 2D</p></li>
+<li><p>Upgrade 2D URP Assets</p></li>
+</ul>
+
+<p>When you select on of the conversion types, the tool shows you the available converters.</p>
+
+<p>The following sections describe the converters available for each conversion type.</p>
+
+<h3>Built-In Render Pipeline to URP</h3>
+
+<p>This conversion type converts project elements from the Built-In Render Pipeline to URP. It enables the following options:</p>
+
+<ul>
+<li><p>
+<strong>Rendering Settings</strong>: Creates the URP asset and Universal Renderer asset, then converts the settings in the Built-In Render Pipeline project to equivalent properties in the URP assets.</p></li>
+<li><p>
+<strong>Material Upgrade</strong>: Converts <a href="../../shader-built-in-birp.html">prebuilt materials</a> to URP materials. This converter doesn’t support materials with custom <span class="tooltip"><strong>shaders</strong><span class="tooltiptext">A program that runs on the GPU. <a class="tooltipMoreInfoLink" href="../../Shaders.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Shader">Glossary</a></span></span></span>.</p></li>
+<li><p>
+<strong>Read-only Material Converter</strong>: Converts <a href="../../shader-built-in-birp.html">prebuilt read-only materials</a> that aren’t in the <strong>Assets</strong> folder of your project, for example <strong>Default-Diffuse</strong> and <strong>Default-Line</strong>. This converter audits the project and creates a temporary <code>.index</code> file, which might take a significant amount of time.</p></li>
+<li><p>
+<strong><span class="tooltip"><strong>Animation Clip</strong><span class="tooltiptext">Animation data that can be used for animated characters or simple animations. It is a simple “unit” piece of motion, such as (one specific instance of) “Idle”, “Walk” or “Run”. <a class="tooltipMoreInfoLink" href="../../class-AnimationClip.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#AnimationClip">Glossary</a></span></span></span> Converter</strong>: Converts animation clips after the <strong>Material Upgrade</strong> converter finishes. This converter is available only if the project contains animations that affect the properties of materials, or <a href="https://docs.unity3d.com/Packages/com.unity.postprocessing@latest">Post-Processing Stack v2</a> properties.</p></li>
+<li><p>
+<strong><span class="tooltip"><strong>Post-Processing</strong><span class="tooltiptext">A process that improves product visuals by applying filters and effects before the image appears on screen. You can use post-processing effects to simulate physical camera and film properties, for example Bloom and Depth of Field. <a class="tooltipMoreInfoLink" href="../../PostProcessingOverview.html">More info</a> <span class="search-words">post processing, postprocessing, postprocess</span><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#post-processing">Glossary</a></span></span></span> Stack v2 Converter</strong>: Converts <a href="https://docs.unity3d.com/Packages/com.unity.postprocessing@latest">Post-Processing Stack v2</a> volumes, profiles, and layers to URP volumes, profiles, and <span class="tooltip"><strong>cameras</strong><span class="tooltiptext">A component which creates an image of a particular viewpoint in your scene. The output is either drawn to the screen or captured as a texture. <a class="tooltipMoreInfoLink" href="../../CamerasOverview.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Camera">Glossary</a></span></span></span>. This converter audits the project and creates a temporary <code>.index</code> file, which might take a significant amount of time. This converter is available only if the Post-Processing Stack v2 package is installed.</p></li>
+</ul>
+
+<h3>Built-In Render Pipeline 2D to URP 2D</h3>
+
+<p>This conversion type converts elements of a project from Built-In Render Pipeline 2D to URP 2D.</p>
+
+<p>Available converters:</p>
+
+<ul>
+<li>
+<p><strong>Material and Material Reference Upgrade</strong></p>
+
+<p>This converter converts all Materials and Material references from Built-In Render Pipeline 2D to URP 2D.</p>
+</li>
+</ul>
+
+<h3>Upgrade 2D URP Assets</h3>
+
+<p>This conversion type upgrades assets of a 2D project from an earlier URP version to the current URP version.</p>
+
+<p>Available converters:</p>
+
+<ul>
+<li>
+<p><strong>Parametric to Freeform Light Upgrade</strong></p>
+
+<p>This converter converts all parametric lights to freeform lights.</p>
+</li>
+</ul>
+
+<h2>How to use the Render Pipeline Converter</h2>
+
+<p>To convert project assets:</p>
+
+<ol>
+<li>
+<p>Select <strong>Window</strong> &gt; <strong>Rendering</strong> &gt; <strong>Render Pipeline Converter</strong>. Unity opens the Render Pipeline Converter window.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/rp-converter-dialog.png" alt="Render Pipeline Converter dialog">
+<figcaption>Render Pipeline Converter dialog</figcaption>
+</figure>
+</li>
+<li>
+<p>Select the conversion type.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/conversion-types.png" alt="Conversion type">
+<figcaption>Conversion type</figcaption>
+</figure>
+</li>
+<li>
+<p>Depending on the conversion type, the dialog shows the available converters. Select or clear the check boxes next to converter names to enable or disable the converters.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/select-converters.png" alt="Select converters">
+<figcaption>Select converters</figcaption>
+</figure>
+
+<p>For the list of available converters, refer to the section <a href="#converters">Converters</a>.</p>
+</li>
+<li>
+<p>Click <strong>Initialize Converters</strong>. The Render Pipeline Converter preprocesses the assets in the project and shows the list of elements to convert. Select or clear check boxes next to assets to include or exclude them from the conversion process.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/initialize.png" alt="Initialize converters">
+<figcaption>Initialize converters</figcaption>
+</figure>
+
+<p>The following illustration shows initialized converters.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/after-initialize.png" alt="Initialized converters">
+<figcaption>Initialized converters</figcaption>
+</figure>
+
+<p>Click a converter to check the list of items that a converter is about to convert.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/converter-detailed-view.png" alt="Converter detailed view">
+<figcaption>Converter detailed view</figcaption>
+</figure>
+
+<p>
+<strong>Yellow icon</strong>: a yellow icon next to an element indicates that a user action might be required to run the conversion. Hover the mouse pointer over the icon to check the description of the issue.</p>
+</li>
+<li>
+<p>Click <strong>Convert Assets</strong> to start the conversion process.</p>
+
+<blockquote>
+<p>
+<strong>Note</strong>: The conversion process makes irreversible changes to the project. Back up your project before the conversion.</p>
+</blockquote>
+
+<p>When the conversion process finishes, the window shows the status of each converter.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/conversion-finished.png" alt="Conversion finished">
+<figcaption>Conversion finished</figcaption>
+</figure>
+
+<p>
+<strong>Green check mark</strong>: the conversion went without issues.</p>
+
+<p>
+<strong>Yellow icon</strong>: the conversion finished with warnings and might require user action.</p>
+
+<p>
+<strong>Red icon</strong>: the conversion failed.</p>
+</li>
+<li>
+<p>Click a converter to check the list of processed items in that converter.</p>
+
+<figure>
+<img src="../../../uploads/urp/rp-converter/conversion-finished-details.png" alt="Conversion finished. Detailed view of a converter">
+<figcaption>Conversion finished. Detailed view of a converter</figcaption>
+</figure>
+
+<p>After reviewing the converted project, close the Render Pipeline Converter window.</p>
+</li>
+</ol>
+
+<h3>Convert only selected materials</h3>
+
+<p>To convert only selected materials, select materials that display the <a href="../../shader-error.html">magenta shader error</a>, and select <strong>Edit</strong> &gt; <strong>Rendering</strong> &gt; <strong>Materials</strong> &gt; <strong>Convert Selected Materials to URP</strong>.</p>
+
+<h1>Run conversion using API or CLI</h1>
+
+<p>The Render Pipeline Converter implements the <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest/index.html?subfolder=/api/UnityEditor.Rendering.Universal.Converters.html">Converters</a> class with <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest/index.html?subfolder=/api/UnityEditor.Rendering.Universal.Converters.html#UnityEditor_Rendering_Universal_Converters_RunInBatchMode_UnityEditor_Rendering_Universal_ConverterContainerId_">RunInBatchMode</a> methods that let you run the conversion process from a command line.</p>
+
+<p>For example, the following script initializes and executes the converters <strong>Material Upgrade</strong>, and <strong>Read-only Material Converter</strong>.</p>
+
+<pre><code class="lang-cs">using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Rendering.Universal;
+using UnityEngine;
+
+public class MyUpgradeScript : MonoBehaviour
+{
+    public static void ConvertBuiltinToURPMaterials()
+    {
+        Converters.RunInBatchMode(
+            ConverterContainerId.BuiltInToURP
+            , new List&lt;ConverterId&gt; {
+                ConverterId.Material,
+                ConverterId.ReadonlyMaterial
+            }
+            , ConverterFilter.Inclusive
+        );
+        EditorApplication.Exit(0);
+    }
+}
+</code></pre>
+
+<p>To run the example conversion from the command line, use the following command:</p>
+
+<pre><code class="lang-shell">&quot;&lt;path to Unity application&gt; -projectPath &lt;project path&gt; -batchmode -executeMethod MyUpgradeScript.ConvertBuiltinToURPMaterials
+</code></pre>
+
+<p>Also check: <a href="../../EditorCommandLineArguments.html">Unity Editor command line arguments</a>.</p>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/upgrading-from-birp.html"></a></span><div class="tip">Upgrading from the Built-In Render Pipeline to URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/upgrade-shaders-landing.html"></a></span><div class="tip">Upgrading shaders to URP from the Built-In Render Pipeline</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>

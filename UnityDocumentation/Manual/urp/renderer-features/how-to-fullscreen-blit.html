@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en" class="no-js">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="6e91be4c-3145-4ea2-aa64-89d716064836" data-dLayer-ignore="true" data-document-language="true"></script><script type="text/javascript">function OptanonWrapper() {}</script><script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'dataLayer-initialized', user: { user_unity_id: undefined, user_logged_in: 'no' }, environment: { environment_locale: 'en-us', environment_currency: undefined }});</script><script>var offline=(location.href.indexOf('docs.unity3d.com')==-1)?true:false;if(!offline){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);  })(window,document,'script','dataLayer','GTM-5V25JL6');}</script><link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity - Manual: Example of a Scriptable Renderer Feature in Compatibility mode in URP</title>
+<meta property="og:image" content="https://unity3d.com/files/images/ogimg.jpg">
+<meta name="author" content="Unity Technologies">
+<meta property="relative-path-to-manual" content="../../">
+<meta property="version-switcher-versions-with-this-page" content="Versions with this page:">
+<meta property="version-switcher-versions-without-this-page" content="Versions without this page:">
+<meta property="version-switcher-supported" content="Supported">
+<meta property="version-switcher-legacy" content="Legacy">
+<link rel="shortcut icon" href="https://unity.com/themes/contrib/unity_base/images/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="../../../StaticFilesManual/images/favicons/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../StaticFilesManual/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" href="../../../StaticFilesManual/images/favicons/apple-touch-icon.png">
+<link rel="canonical" href="https://docs.unity3d.com/6000.2/Documentation/Manual/urp/renderer-features/how-to-fullscreen-blit.html">
+<meta name="msapplication-TileColor" content="#222c37">
+<meta name="msapplication-TileImage" content="../../../StaticFilesManual/images/favicons/tileicon-144x144.png">
+<script type="text/javascript" src="/StaticFilesConfig/UnityVersionsInfo.js"></script><script type="text/javascript" src="../../../StaticFilesManual/js/jquery.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/core.js?ts=20250905"></script><script type="text/javascript" src="../../../StaticFilesManual/js/image-comp.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/toc.js?ts=20250905"></script><script type="text/javascript" src="../../docdata/global_toc.js?ts=20250905"></script><link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/core.css?ts=20250905">
+<link rel="stylesheet" type="text/css" href="../../../StaticFilesManual/css/icons.css?ts=20250905">
+<link rel="stylesheet" href="../../../StaticFilesManual/css/prism.css">
+<script src="../../../StaticFilesManual/js/prism.js"></script><script src="/StaticFilesConfig/feedback/feedback.js"></script><script src="../../../StaticFilesManual/js/jquery.sidebar.min.js"></script><link rel="stylesheet" href="../../../StaticFilesManual/css/mobileoptimisation.css">
+<script src="../../../StaticFilesManual/js/mobileoptimisation.js"></script>
+</head>
+<body>
+<div id="DocsAnalyticsData" data-area="none" data-pagetype="manual"></div>
+<div class="header-wrapper">
+<div id="header" class="header"><div class="content">
+<div class="spacer"><div class="menu">
+<div id="nav-open" for="nav-input"><span></span></div>
+<div class="logo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+<div class="search-form"><form action="../../30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" class="submit">
+</form></div>
+<ul>
+<li><a href="../../index.html" class="selected">Manual</a></li>
+<li><a href="../../../ScriptReference/index.html">Scripting API</a></li>
+</ul>
+</div></div>
+<div class="more">
+<div class="filler"></div>
+<ul><li><a href="https://unity.com/">unity.com</a></li></ul>
+</div>
+</div></div>
+<div class="toolbar"><div class="content">
+<div class="toggle version-number" id="VersionNumber" data-target=".otherversionscontent">
+                                Version: <b>Unity 6.2</b> (6000.2)
+                                <div class="otherversionscontent" id="OtherVersionsContent" style="display: none;">
+<ul id="OtherVersionsContentUl"></ul>
+<div id="otherVersionsLegend"><ul>
+<li>
+<div id="supportedColour" class="legendBox"></div>Supported</li>
+<li>
+<div id="notFoundColour" class="legendBox"></div>Legacy</li>
+</ul></div>
+</div>
+<div id="VersionSwitcherArrow" class="arrow versionSwitcherArrow"></div>
+</div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/renderer-features/how-to-fullscreen-blit.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div>
+<div class="mobileLogo"><a aria-label="go to the homepage" href="https://docs.unity3d.com"></a></div>
+</div>
+<div id="master-wrapper" class="master-wrapper clear">
+<div id="sidebar" class="sidebar"><div class="sidebar-wrap"><div class="content"><div class="sidebar-menu"><div class="toc" id="customScrollbar">
+<h2>Unity Manual</h2>
+<div class="search-form sidebar-search-form"><form action="30_search.html" method="get" class="apisearch">
+<input type="text" name="q" aria-label="Search manual documentation" placeholder="Search manual..." autosave="Unity Reference" results="5" class="sbox field" id="q"><input type="submit" id="mobileSearchBtn" class="submit" value="Search">
+</form></div>
+<div class="toggle version-number sidebar-version-switcher" id="VersionNumber" data-target=".otherversionscontent"><form id="otherVersionsContentMobileForm"><div class="ui-field-contain">
+<label for="select-native-4">Version: Unity 6.2</label><select name="select-native-4" id="versionsSelectMobile"><option>Select a different version</option>
+<optgroup id="versionsWithThisPageMobile" label="Versions with this page"></optgroup>
+<optgroup id="versionsWithoutThisPageMobile" label="Versions without this page"></optgroup></select>
+</div></form></div>
+<div class="lang-switcher"><div class="current toggle" data-target=".lang-list">
+<div class="lbl">Language
+:                <span class="b">English</span>
+</div>
+<div class="arrow"></div>
+<div class="lang-list" style="display:none;"><ul>
+<li><a href="/Manual/urp/renderer-features/how-to-fullscreen-blit.html">English</a></li>
+<li><a href="/cn/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">中文</a></li>
+<li><a href="/ja/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">日本語</a></li>
+<li><a href="/kr/current/Manual/urp/renderer-features/how-to-fullscreen-blit.html">한국어</a></li>
+</ul></div>
+</div></div>
+</div></div></div></div></div>
+<div id="content-wrap" class="content-wrap"><div class="content-block"><div class="content">
+<div class="section">
+<div class="breadcrumbs clear"><ul>
+<li><a href="../../render-pipelines.html">Render pipelines</a></li>
+<li><a href="../../universal-render-pipeline.html">Using the Universal Render Pipeline</a></li>
+<li><a href="../../urp/customizing-urp.html">Custom rendering and post-processing in URP</a></li>
+<li><a href="../../urp/compatibility-mode.html">Compatibility Mode in URP</a></li>
+<li>Example of a Scriptable Renderer Feature in Compatibility mode in URP</li>
+</ul></div>
+<div class="mb20"><div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/renderer-features/write-a-scriptable-render-pass.html"></a></span><div class="tip">Write a Scriptable Render Pass in Compatibility Mode in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/renderer-features/scriptable-renderer-features/scriptable-render-pass-reference.html"></a></span><div class="tip">Scriptable Render Pass Compatibility Mode API reference for URP</div>
+</div>
+</div></div>
+<div id="_leavefeedback"></div>
+<h1>Example of a Scriptable Renderer Feature in Compatibility mode in URP</h1>
+<!--BeginSwitchLink--><!--EndSwitchLink-->
+<div class="clear"></div>
+
+<p>The example on this page performs a full-screen <span class="tooltip"><strong>blit</strong><span class="tooltiptext">A shorthand term for “bit block transfer”. A blit operation is the process of transferring blocks of data from one place in memory to another.<br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#blit">Glossary</a></span></span></span> that tints the screen green.</p>
+
+<p>
+<strong>Note:</strong> Unity no longer develops or improves the rendering path that doesn’t use the <a href="../render-graph.html">render graph API</a>. Use the render graph API instead when developing new graphics features. To use the instructions on this page, enable <strong>Compatibility Mode (Render Graph Disabled)</strong> in URP graphics settings (<strong>Project Settings</strong> &gt; <strong>Graphics</strong>).</p>
+
+<p>To use the examples, follow these steps:</p>
+
+<ol>
+<li>
+<p>To create the custom render pass, create a new C# script called <code>ColorBlitPass.cs</code>, then paste in the code from the <a href="#render-pass">Example custom render pass</a> section.</p>
+
+<p>
+<strong>Note:</strong> The example uses the <code>Blitter</code> API. Don’t use the <code>CommandBuffer.Blit</code> API in Compatibility Mode. Refer to <a href="../customize/blit-overview.html">Blit in Compatibility Mode</a> for more information.</p>
+</li>
+<li><p>To create the Scriptable Renderer Feature that adds the custom render pass to the render loop, create a new C# script called <code>ColorBlitRendererFeature.cs</code>, then paste in the code from the <a href="#scriptable-renderer-feature">Example Scriptable Renderer Feature</a> section.</p></li>
+<li>
+<p>To create the <span class="tooltip"><strong>shader</strong><span class="tooltiptext">A program that runs on the GPU. <a class="tooltipMoreInfoLink" href="../../Shaders.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Shader">Glossary</a></span></span></span> code that tints the <span class="tooltip"><strong>pixels</strong><span class="tooltiptext">The smallest unit in a computer image. Pixel size depends on your screen resolution. Pixel lighting is calculated at every screen pixel. <a class="tooltipMoreInfoLink" href="../../ShadowPerformance.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#pixel">Glossary</a></span></span></span> green, <a href="../../class-Shader.html">create a shader file</a>, then paste in the code from the <a href="#shader">Example shader</a> section.</p>
+
+<p>
+<strong>Note:</strong> The shader you use with the <code>Blitter</code> API must be a hand-coded shader. <a href="../../shader-graph.html">Shader Graph</a> shaders aren’t compatible with the <code>Blitter</code> API.</p>
+</li>
+<li><p>Add the <code>ColorBlitRendererFeature</code> to the current URP Renderer asset. For more information, refer to <a href="../urp-renderer-feature.html">Add a Renderer Feature to a URP Renderer</a>.</p></li>
+</ol>
+
+<p>To change the brightness, adjust the <strong>Intensity</strong> property in the <strong>Color Blit Renderer Feature</strong> component.</p>
+
+<p>
+<strong>Note:</strong> To visualize the example if your project uses <span class="tooltip"><strong>XR</strong><span class="tooltiptext">An umbrella term encompassing Virtual Reality (VR), Augmented Reality (AR) and Mixed Reality (MR) applications. Devices supporting these forms of interactive applications can be referred to as XR devices. <a class="tooltipMoreInfoLink" href="../../XR.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#XR">Glossary</a></span></span></span>, install the <a href="https://docs.unity3d.com/Packages/com.unity.xr.mock-hmd@latest/">MockHMD XR Plugin</a> package in your project, then set the <strong>Render Mode</strong> property to <strong>Single Pass Instanced</strong>.</p>
+
+<p><a name="render-pass" aria-hidden="true"></a></p>
+
+<h2>Example custom render pass</h2>
+
+<pre><code class="lang-cs">using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
+internal class ColorBlitPass : ScriptableRenderPass
+{
+    ProfilingSampler m_ProfilingSampler = new ProfilingSampler(&quot;ColorBlit&quot;);
+    Material m_Material;
+    RTHandle m_CameraColorTarget;
+    float m_Intensity;
+
+    public ColorBlitPass(Material material)
+    {
+        m_Material = material;
+        renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+    }
+
+    public void SetTarget(RTHandle colorHandle, float intensity)
+    {
+        m_CameraColorTarget = colorHandle;
+        m_Intensity = intensity;
+    }
+
+    public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
+    {
+        ConfigureTarget(m_CameraColorTarget);
+    }
+
+    public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+    {
+        var cameraData = renderingData.cameraData;
+        if (cameraData.camera.cameraType != CameraType.Game)
+            return;
+
+        if (m_Material == null)
+            return;
+
+        CommandBuffer cmd = CommandBufferPool.Get();
+        using (new ProfilingScope(cmd, m_ProfilingSampler))
+        {
+            m_Material.SetFloat(&quot;_Intensity&quot;, m_Intensity);
+            Blitter.BlitCameraTexture(cmd, m_CameraColorTarget, m_CameraColorTarget, m_Material, 0);
+        }
+        context.ExecuteCommandBuffer(cmd);
+        cmd.Clear();
+
+        CommandBufferPool.Release(cmd);
+    }
+}
+</code></pre>
+
+<p><a name="scriptable-renderer-feature" aria-hidden="true"></a></p>
+
+<h2>Example Scriptable Renderer Feature</h2>
+
+<p>The Scriptable Renderer Feature adds the render pass to the render loop.</p>
+
+<pre><code class="lang-cs">using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
+internal class ColorBlitRendererFeature : ScriptableRendererFeature
+{
+    public Shader m_Shader;
+    public float m_Intensity;
+
+    Material m_Material;
+
+    ColorBlitPass m_RenderPass = null;
+
+    public override void AddRenderPasses(ScriptableRenderer renderer,
+                                    ref RenderingData renderingData)
+    {
+        if (renderingData.cameraData.cameraType == CameraType.Game)
+            renderer.EnqueuePass(m_RenderPass);
+    }
+
+    public override void SetupRenderPasses(ScriptableRenderer renderer,
+                                        in RenderingData renderingData)
+    {
+        if (renderingData.cameraData.cameraType == CameraType.Game)
+        {
+            // Calling ConfigureInput with the ScriptableRenderPassInput.Color argument
+            // ensures that the opaque texture is available to the Render Pass.
+            m_RenderPass.ConfigureInput(ScriptableRenderPassInput.Color);
+            m_RenderPass.SetTarget(renderer.cameraColorTargetHandle, m_Intensity);
+        }
+    }
+
+    public override void Create()
+    {
+        m_Material = CoreUtils.CreateEngineMaterial(m_Shader);
+        m_RenderPass = new ColorBlitPass(m_Material);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        CoreUtils.Destroy(m_Material);
+    }
+}
+</code></pre>
+
+<p><a name="shader" aria-hidden="true"></a></p>
+
+<h2>Example shader</h2>
+
+<p>The shader performs the GPU side of the rendering. It samples the color texture from the <span class="tooltip"><strong>camera</strong><span class="tooltiptext">A component which creates an image of a particular viewpoint in your scene. The output is either drawn to the screen or captured as a texture. <a class="tooltipMoreInfoLink" href="../../CamerasOverview.html">More info</a><br/><span class="tooltipGlossaryLink">See in <a href="../../Glossary.html#Camera">Glossary</a></span></span></span>, then outputs the color with the green value set to the chosen intensity.</p>
+
+<pre><code class="lang-cpp">Shader &quot;ColorBlit&quot;
+{
+    SubShader
+    {
+        Tags { &quot;RenderType&quot;=&quot;Opaque&quot; &quot;RenderPipeline&quot; = &quot;UniversalPipeline&quot;}
+        LOD 100
+        ZWrite Off Cull Off
+        Pass
+        {
+            Name &quot;ColorBlitPass&quot;
+
+            HLSLPROGRAM
+            #include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;
+            
+            // The Blit.hlsl file provides the vertex shader (Vert),
+            // the input structure (Attributes) and the output structure (Varyings)
+            #include &quot;Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl&quot;
+
+            #pragma vertex Vert
+            #pragma fragment frag
+
+            // Set the color texture from the camera as the input texture
+            TEXTURE2D_X(_CameraOpaqueTexture);
+            SAMPLER(sampler_CameraOpaqueTexture);
+
+            // Set up an intensity parameter
+            float _Intensity;
+
+            half4 frag (Varyings input) : SV_Target
+            {
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
+                // Sample the color from the input texture
+                float4 color = SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, input.texcoord);
+
+                // Output the color from the texture, with the green value set to the chosen intensity
+                return color * float4(0, _Intensity, 0, 1);
+            }
+            ENDHLSL
+        }
+    }
+}
+</code></pre>
+
+<h2>Additional resources</h2>
+
+<ul>
+<li><a href="../renderer-features/custom-rendering-pass-workflow-in-urp.html">Custom render pass workflow</a></li>
+<li><a href="../renderer-features/scriptable-renderer-features/scriptable-renderer-features-landing.html">Injecting a render pass via a Scriptable Renderer Feature</a></li>
+<li><a href="../writing-custom-shaders-urp.html">Writing custom shaders in URP</a></li>
+</ul>
+<div id="_content"></div>
+<div class="nextprev clear">
+<div class="icon tt left mr1" data-distance="-40|-30|top">
+<span class="prev"><a aria-label="go to the previous page" href="../../urp/renderer-features/write-a-scriptable-render-pass.html"></a></span><div class="tip">Write a Scriptable Render Pass in Compatibility Mode in URP</div>
+</div>
+<div class="icon tt right" data-distance="-40|-30|top">
+<span class="next"><a aria-label="go to the next page" href="../../urp/renderer-features/scriptable-renderer-features/scriptable-render-pass-reference.html"></a></span><div class="tip">Scriptable Render Pass Compatibility Mode API reference for URP</div>
+</div>
+</div>
+</div>
+<div class="footer-wrapper"><div class="footer clear">
+<div class="copy">Copyright ©2005-2025 Unity Technologies. All rights reserved. Built from 6000.2.5f1 (6de28e1118ee). Built on: 2025-09-05.</div>
+<div class="menu">
+<a href="https://learn.unity.com/">Tutorials</a><a href="https://answers.unity3d.com">Community Answers</a><a href="https://support.unity3d.com/hc/en-us">Knowledge Base</a><a href="https://forum.unity3d.com">Forums</a><a href="https://unity3d.com/asset-store">Asset Store</a><a href="https://docs.unity3d.com/Manual/TermsOfUse.html">Terms of use</a><a href="https://unity.com/legal">Legal</a><a href="https://unity.com/legal/privacy-policy">Privacy Policy</a><a href="https://unity.com/legal/cookie-policy">Cookies</a><a href="https://unity.com/legal/do-not-sell-my-personal-information">Do Not Sell or Share My Personal Information</a><div id="ot-sdk-btn-container"><a id="ot-sdk-btn" class="ot-sdk-show-settings" href="javascript:void(0);">Your Privacy Choices (Cookie Settings)</a></div>
+</div>
+</div></div>
+</div></div></div>
+</div>
+</body>
+</html>
