@@ -1,0 +1,29 @@
+*** Begin Patch
+*** Update File: agents.md
+@@
+ This game is build in Unity 6.2
+ 
++## Unity MCP Quick Reference (agent tooling)
++
++- validate: Validate C# scripts for syntax/issues via alidate_script.
++- script edits: Safely insert/replace/delete methods using script_apply_edits.
++- text edits: Precise range edits with pply_text_edits (raw text mode).
++- read file: Read any C# under Assets/ with ead_resource.
++- list/search: list_resources to enumerate, ind_in_file to grep by regex.
++- sha/size: get_sha to fetch file hash/length for safe edits.
++- scripts CRUD: Create/delete via manage_script (compat) or create_script/delete_script.
++- shaders: Create/update/read/delete shaders with manage_shader.
++- scenes: Load/save/create and query scenes via manage_scene.
++- assets: Import/create/modify/move/rename/search using manage_asset.
++- editor: Play/pause/query state, set tools/tags/layers with manage_editor.
++- menu: Execute/list/check menu items using manage_menu_item.
++- console: Get/clear Editor Console logs with ead_console.
++
++Tips
++- Prefer script_apply_edits over raw text edits to avoid brace/scope breakage.
++- Run alidate_script after changes; fix diagnostics before continuing.
++- Use ind_in_file + list_resources to locate targets before editing.
++- For Unity 6.x, avoid deprecated APIs (e.g., use Object.FindFirstObjectByType<T>()).
++
+ ### Unity 6.x migration reminders (code??'impacting)
+*** End Patch

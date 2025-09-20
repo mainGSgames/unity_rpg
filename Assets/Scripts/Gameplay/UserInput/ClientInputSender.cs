@@ -609,11 +609,9 @@ namespace Unity.BossRoom.Gameplay.UserInput
 
         void Update()
         {
-            if (!EventSystem.current.IsPointerOverGameObject() && m_CurrentSkillInput == null)
+            // Always allow mouse attacks, even when pointer is over UI. This ensures LMB/RMB fire attacks reliably.
+            if (m_CurrentSkillInput == null)
             {
-                //IsPointerOverGameObject() is a simple way to determine if the mouse is over a UI element. If it is, we don't perform mouse input logic,
-                //to model the button "blocking" mouse clicks from falling through and interacting with the world.
-
                 // Primary attack on Left Mouse
                 if (m_Skill1Action.action.WasPressedThisFrame() || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
                 {
@@ -625,9 +623,9 @@ namespace Unity.BossRoom.Gameplay.UserInput
                 {
                     RequestAction(actionState2.actionID, SkillTriggerStyle.MouseClick);
                 }
-
-                // Disable click-to-move/targeting via m_TargetAction to avoid conflicts with RMB attack
             }
+
+            // Click-to-move/targeting should remain suppressed when the pointer is over UI to prevent unintended moves.
 
             // Read keyboard WASD for continuous movement
             var move = Vector2.zero;
